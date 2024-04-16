@@ -3,6 +3,9 @@ using FurnitureStore.API.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var config = builder.Configuration;
+config.AddEnvironmentVariables("FurnitureStoreAPI_");
+
 builder.Services.AddControllers();
 
 builder.Services.AddRepositories(builder.Configuration);
