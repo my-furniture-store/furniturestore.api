@@ -1,1 +1,1 @@
-# FurnitureStore
+# FurnitureStore.API
