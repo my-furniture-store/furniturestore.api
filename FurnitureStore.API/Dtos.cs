@@ -1,4 +1,11 @@
-﻿namespace FurnitureStore.API.Dtos;
+﻿using System.ComponentModel.DataAnnotations;
 
-public record CategoryDto(
-    string Name);
+namespace FurnitureStore.API.Dtos;
+
+public record CategoryDto
+{
+    public int Id { get; init; }
+    [Required]
+    [StringLength(20)]
+    public string? Name { get; init; }
+}

@@ -17,6 +17,11 @@ public class CategoryRepository : ICategoryRepository
         return await _storeContext.Categories.ToListAsync();
     }
 
+    public async Task<Category?> GetByIdAsync(int id)
+    {
+        return await _storeContext.Categories.FindAsync(id);
+    }
+
     public async Task<Category?> GetAsync(int id)
     {
         return await _storeContext.Categories.FindAsync(id);

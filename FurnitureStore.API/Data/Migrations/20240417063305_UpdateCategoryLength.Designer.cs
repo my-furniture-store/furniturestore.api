@@ -2,6 +2,7 @@
 using FurnitureStore.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FurnitureStore.API.Data.Migrations
 {
     [DbContext(typeof(FurnitureStoreContext))]
-    partial class FurnitureStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20240417063305_UpdateCategoryLength")]
+    partial class UpdateCategoryLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

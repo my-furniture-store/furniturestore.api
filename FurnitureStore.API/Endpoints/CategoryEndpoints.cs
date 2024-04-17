@@ -11,6 +11,7 @@ public static class CategoryEndpoints
     public static RouteGroupBuilder MapCategoryEndpoints(this IEndpointRouteBuilder routes)
     {
         var group = routes.MapGroup("/api/categories")
+                          .WithParameterValidation()
                           .WithTags("Categories");
 
 
@@ -19,17 +20,29 @@ public static class CategoryEndpoints
             var categories = await repository.GetAllAsync();
             return Results.Ok(categories.Select(c => c.AsDto()));
         })
-        .WithName(GetCategoriesEndpointName)
         .WithSummary("Gets all categories")
         .WithDescription("Get all available categories");
 
+        group.MapGet("/{id:int}", async Task<Results<Ok<CategoryDto>, NotFound>> (ICategoryRepository repository, int id) =>
+        {
+            Category? category = await repository.GetByIdAsync(id);
+
+            if (category == null)
+                return TypedResults.NotFound();
+
+            return TypedResults.Ok(category.AsDto());
+        })
+        .WithName(GetCategoriesEndpointName)
+        .WithSummary("Get Category by id")
+        .WithDescription("Gets the category that has the specified id");
+
         group.MapPost("/", async Task<CreatedAtRoute<CategoryDto>> (ICategoryRepository repository, CategoryDto categoryDto) =>
         {
-            Category category = new Category { Name = categoryDto.Name };
+            Category category = new Category { Name = categoryDto.Name! };
 
             await repository.CreateAsync(category);
 
-            return TypedResults.CreatedAtRoute(category.AsDto(), GetCategoriesEndpointName, new { id = category.Id });
+            return TypedResults.CreatedAtRoute(category.AsDto(), GetCategoriesEndpointName, new { category.Id });
         })
         .WithSummary("Creates a new category")
         .WithDescription("Creates a new category with specified properties");
@@ -41,7 +54,7 @@ public static class CategoryEndpoints
             if (category is null)
                 return TypedResults.NotFound();
 
-            category.Name = categoryDto.Name;
+            category.Name = categoryDto.Name!;
 
             await repository.UpdateAsync(category);
 
