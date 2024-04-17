@@ -1,4 +1,6 @@
-﻿namespace FurnitureStore.API.Tests.Integration.Endpoints.CategoryEndpoints;
+﻿using Newtonsoft.Json;
+
+namespace FurnitureStore.API.Tests.Integration.Endpoints.CategoryEndpoints;
 
 [Collection("FurnitureStore.API Collection")]
 public class GetCategoryEndpointTests:IAsyncLifetime
@@ -37,7 +39,7 @@ public class GetCategoryEndpointTests:IAsyncLifetime
 
 
     [Fact]
-    public async void Get_ReturnsEmptyResult_WhenNoCategoriesExist()
+    public async Task Get_ReturnsEmptyResult_WhenNoCategoriesExist()
     {
         // Act
         var response = await _httpClient.GetAsync("api/categories");
@@ -47,6 +49,36 @@ public class GetCategoryEndpointTests:IAsyncLifetime
 
         var categories = await response.Content.ReadFromJsonAsync<List<Category>>();
         categories.Should().BeEmpty();
+    }
+
+
+    [Fact]
+    public async Task GetById_ReturnsNotFound_WhenIdIsInvalid()
+    {
+        // Act
+        var response = await _httpClient.GetAsync("api/categories/123");
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+
+    [Fact]
+    public async void GetById_ReturnCategory_WhenIdIsValid()
+    {
+        // Arrange
+        var category = new Category { Name = "chairs" };
+        await CategoryTestHelper.CreateCategory(_appFactory, category);
+
+        // Act
+        var response = await _httpClient.GetAsync($"api/categories/{category.Id}");
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        var categoryResponse = await HttpResponseHelper.GetFromResponse<CategoryDto>(response);
+        categoryResponse.Should().NotBeNull();
+        categoryResponse!.Should().BeEquivalentTo(category);
     }
 
 
