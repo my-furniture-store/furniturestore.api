@@ -9,7 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3A66B0CA-7F3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{59CCDE64-17BA-4899-BECF-0A1E4EBE3DC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.API.Tests.Integration", "FurnitureStore.API.Tests.Integration\FurnitureStore.API.Tests.Integration.csproj", "{CF53EBCA-B8D1-40CD-A324-95A4FAE2DC89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureStore.API.Tests.Integration", "FurnitureStore.API.Tests.Integration\FurnitureStore.API.Tests.Integration.csproj", "{CF53EBCA-B8D1-40CD-A324-95A4FAE2DC89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Domain", "FurnitureStore.Domain\FurnitureStore.Domain.csproj", "{B3C33BDC-85AC-444E-A7F7-0B7707C040F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Application", "FurnitureStore.Application\FurnitureStore.Application.csproj", "{805AFE2A-323B-4E3F-BD3F-A3D6BBF70888}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Infrastructure", "FurnitureStore.Infrastructure\FurnitureStore.Infrastructure.csproj", "{4D823A66-EF12-46DE-AB88-6D1BDE762393}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Contracts", "FurnitureStore.Contracts\FurnitureStore.Contracts.csproj", "{C601E4C4-4CAB-467C-8F93-46CFF77C5210}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +33,22 @@ Global
 		{CF53EBCA-B8D1-40CD-A324-95A4FAE2DC89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF53EBCA-B8D1-40CD-A324-95A4FAE2DC89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF53EBCA-B8D1-40CD-A324-95A4FAE2DC89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3C33BDC-85AC-444E-A7F7-0B7707C040F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3C33BDC-85AC-444E-A7F7-0B7707C040F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3C33BDC-85AC-444E-A7F7-0B7707C040F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3C33BDC-85AC-444E-A7F7-0B7707C040F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{805AFE2A-323B-4E3F-BD3F-A3D6BBF70888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805AFE2A-323B-4E3F-BD3F-A3D6BBF70888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805AFE2A-323B-4E3F-BD3F-A3D6BBF70888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805AFE2A-323B-4E3F-BD3F-A3D6BBF70888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D823A66-EF12-46DE-AB88-6D1BDE762393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D823A66-EF12-46DE-AB88-6D1BDE762393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D823A66-EF12-46DE-AB88-6D1BDE762393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D823A66-EF12-46DE-AB88-6D1BDE762393}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C601E4C4-4CAB-467C-8F93-46CFF77C5210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C601E4C4-4CAB-467C-8F93-46CFF77C5210}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C601E4C4-4CAB-467C-8F93-46CFF77C5210}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C601E4C4-4CAB-467C-8F93-46CFF77C5210}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +56,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D8FB5A77-AE22-4026-BE80-5795F04D5FE3} = {3A66B0CA-7F31-4C53-97BE-FBC3065F821F}
 		{CF53EBCA-B8D1-40CD-A324-95A4FAE2DC89} = {59CCDE64-17BA-4899-BECF-0A1E4EBE3DC7}
+		{B3C33BDC-85AC-444E-A7F7-0B7707C040F9} = {3A66B0CA-7F31-4C53-97BE-FBC3065F821F}
+		{805AFE2A-323B-4E3F-BD3F-A3D6BBF70888} = {3A66B0CA-7F31-4C53-97BE-FBC3065F821F}
+		{4D823A66-EF12-46DE-AB88-6D1BDE762393} = {3A66B0CA-7F31-4C53-97BE-FBC3065F821F}
+		{C601E4C4-4CAB-467C-8F93-46CFF77C5210} = {3A66B0CA-7F31-4C53-97BE-FBC3065F821F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CE62451-B7E9-4051-AEF0-57D87E248F1C}
