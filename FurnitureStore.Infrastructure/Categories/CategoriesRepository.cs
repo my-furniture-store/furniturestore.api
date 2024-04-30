@@ -24,7 +24,7 @@ public class CategoriesRepository : ICategoriesRepository
         return await _dbContext.Categories.AsNoTracking().AnyAsync(category => category.Id == categoryId);
     }
 
-    public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
+    public async Task<List<Category>> GetAllCategoriesAsync()
     {
         return await _dbContext.Categories.ToListAsync();
     }

@@ -1,7 +1,8 @@
-﻿using FurnitureStore.Domain.Categories;
+﻿using ErrorOr;
+using FurnitureStore.Domain.Categories;
 using MediatR;
 
 namespace FurnitureStore.Application.Categories.Queries.ListCategories;
 
-public record ListCategoriesQuery : IRequest<IEnumerable<Category>>;
+public record ListCategoriesQuery : IRequest<ErrorOr<List<Category>>>;
 

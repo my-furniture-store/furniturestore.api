@@ -8,6 +8,6 @@ public interface ICategoriesRepository
     Task<bool> ExistsAsync(Guid categoryId);
     Task RemoveCategoryAsync(Category category);
     Task<Category?> GetByIdAsync(Guid categoryId);
-    Task<IEnumerable<Category>> GetAllCategoriesAsync();
+    Task<List<Category>> GetAllCategoriesAsync();
     Task UpdateCategoryAsync(Category category);
 }
