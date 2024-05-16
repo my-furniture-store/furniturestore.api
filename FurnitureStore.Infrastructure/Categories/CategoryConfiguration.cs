@@ -12,7 +12,15 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 
         builder.HasKey(category => category.Id);
 
-        builder.Property(category => category.Id).HasColumnName("id").HasColumnType("guid").IsRequired().ValueGeneratedNever();
-        builder.Property(category => category.Name).HasColumnName("name").HasColumnType("character varying").IsRequired().HasMaxLength(50);
+        builder.Property(category => category.Id)
+            .HasColumnName("id")
+            .HasColumnType("guid")
+            .IsRequired()
+            .ValueGeneratedNever();
+        builder.Property(category => category.Name)
+            .HasColumnName("name")
+            .HasColumnType("character varying")
+            .IsRequired()
+            .HasMaxLength(50);
     }
 }

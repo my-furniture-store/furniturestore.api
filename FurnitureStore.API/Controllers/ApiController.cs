@@ -7,6 +7,7 @@ namespace FurnitureStore.API.Controllers;
 [ApiController]
 public class ApiController : ControllerBase
 {
+    [NonAction]
     public IActionResult Problem(List<Error> errors)
     {
         if (errors.Count is 0)
@@ -22,6 +23,7 @@ public class ApiController : ControllerBase
         return Problem(errors[0]);
     }
 
+    [NonAction]
     public IActionResult Problem(Error error)
     {
         var statusCode = error.Type switch
@@ -35,6 +37,7 @@ public class ApiController : ControllerBase
         return Problem(statusCode: statusCode, detail: error.Description);
     }
 
+    [NonAction]
     public IActionResult ValidationProblem(List<Error> errors)
     {
         var modelStateDictionary = new ModelStateDictionary();

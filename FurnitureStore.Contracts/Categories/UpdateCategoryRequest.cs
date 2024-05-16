@@ -2,4 +2,5 @@
 
 namespace FurnitureStore.Contracts.Categories;
 
-public record CreateCategoryRequest([Required][StringLength(50)]string Name);
+public record UpdateCategoryRequest([Required][StringLength(50)]string Name);
+

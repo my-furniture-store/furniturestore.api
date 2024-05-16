@@ -25,15 +25,11 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
             return Error.NotFound(description: "Category not found.");
         }
 
-        var category = new Category
-        (
-            name: categoryToUpdate.Name,
-            id: categoryToUpdate.Id
-        );
+        categoryToUpdate.UpdateCategory(name: request.CategoryName);
 
-        await _categoriesRepository.UpdateCategoryAsync(category);
+        await _categoriesRepository.UpdateCategoryAsync(categoryToUpdate);
         await _unitofWork.CommitChangesAsync();
 
-        return category;
+        return categoryToUpdate;
     }
 }

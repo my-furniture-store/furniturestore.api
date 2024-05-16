@@ -1,5 +1,6 @@
-﻿using FurnitureStore.API.Data;
-using FurnitureStore.API.Repositories;
+﻿using FurnitureStore.Application.Common.Interfaces;
+using FurnitureStore.Infrastructure.Categories;
+using FurnitureStore.Infrastructure.Common;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -30,9 +31,9 @@ public class FurnistoreApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLif
 
         builder.ConfigureTestServices(services =>
         {
-            services.RemoveAll(typeof(FurnitureStoreContext));
-            services.AddNpgsql<FurnitureStoreContext>(_dbContainer.GetConnectionString())
-            .AddScoped<ICategoryRepository, CategoryRepository>();
+            services.RemoveAll(typeof(FurnitureStoreDbContext));
+            services.AddNpgsql<FurnitureStoreDbContext>(_dbContainer.GetConnectionString())
+            .AddScoped<ICategoriesRepository, CategoriesRepository>();
             
         });
     }

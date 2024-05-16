@@ -1,5 +1,6 @@
-﻿using FurnitureStore.API.Data;
-using FurnitureStore.API.Repositories;
+﻿using FurnitureStore.Application.Common.Interfaces;
+using FurnitureStore.Domain.Categories;
+using FurnitureStore.Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,11 +12,11 @@ public static class CategoryTestHelper
     {
         using (var scope = appFactory.Services.CreateScope())
         {
-            var categoryRepo = scope.ServiceProvider.GetRequiredService<ICategoryRepository>();
+            var categoryRepo = scope.ServiceProvider.GetRequiredService<ICategoriesRepository>();
 
             foreach(var category in categories) 
             {
-                await categoryRepo.CreateAsync(category);
+                await categoryRepo.AddCategoryAsync(category);
             }
 
         }
@@ -25,7 +26,7 @@ public static class CategoryTestHelper
     {
         using (var scope = appFactory.Services.CreateScope())
         {
-            var dbContext = scope.ServiceProvider.GetRequiredService<FurnitureStoreContext>();
+            var dbContext = scope.ServiceProvider.GetRequiredService<FurnitureStoreDbContext>();
 
             var categories = await dbContext.Categories.ToListAsync();
             dbContext.Categories.RemoveRange(categories);       

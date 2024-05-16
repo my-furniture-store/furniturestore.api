@@ -1,8 +1,8 @@
-﻿version: '3.9'
-
-services:
+﻿services:
   api:
-    build: .
+    build:
+        context: ..
+        dockerfile: FurnitureStore.API/Dockerfile
     ports:
       - "7070:443"
       - "5050:80"

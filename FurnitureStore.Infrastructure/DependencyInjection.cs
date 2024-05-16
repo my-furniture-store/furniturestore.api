@@ -21,7 +21,8 @@ public static class DependencyInjection
         var connectionString = configuration.GetConnectionString("FurnitureStoreDB");
 
         services.AddNpgsql<FurnitureStoreDbContext>(connectionString)
-                .AddScoped<ICategoriesRepository, CategoriesRepository>();
+                .AddScoped<ICategoriesRepository, CategoriesRepository>()
+                .AddScoped<IUnitofWork>(serviceProvider => serviceProvider.GetRequiredService<FurnitureStoreDbContext>());
 
         // Configure FluentMigrator
         services
