@@ -10,4 +10,12 @@ public static class HttpResponseHelper
         T? t = JsonConvert.DeserializeObject<T>(jsonResponse);
         return t;
     }
+
+    public static async Task<T?> ReadFromResponse<T>(HttpResponseMessage response)
+    {
+        if (response.Content is null)
+            return default(T);
+
+        return await response.Content.ReadFromJsonAsync<T>();
+    }
 }
