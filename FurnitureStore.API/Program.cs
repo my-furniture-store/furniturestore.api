@@ -1,9 +1,15 @@
+using FurnitureStore.Application;
+using FurnitureStore.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var config = builder.Configuration;
 config.AddEnvironmentVariables("FurnitureStoreAPI_");
 
 builder.Services.AddControllers();
+
+builder.Services.AddApplication()
+                .AddInfrastructure(config);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -17,6 +23,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.Services.RunMigarions();
 
 app.UseHttpsRedirection();
 
