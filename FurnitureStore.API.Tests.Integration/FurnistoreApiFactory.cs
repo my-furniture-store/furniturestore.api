@@ -33,7 +33,8 @@ public class FurnistoreApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLif
         {
             services.RemoveAll(typeof(FurnitureStoreDbContext));
             services.AddNpgsql<FurnitureStoreDbContext>(_dbContainer.GetConnectionString())
-            .AddScoped<ICategoriesRepository, CategoriesRepository>();
+            .AddScoped<ICategoriesRepository, CategoriesRepository>()
+            .AddScoped<IUnitofWork>(serviceProvider => serviceProvider.GetRequiredService<FurnitureStoreDbContext>());
             
         });
     }

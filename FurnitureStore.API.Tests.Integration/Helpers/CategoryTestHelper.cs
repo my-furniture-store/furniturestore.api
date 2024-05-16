@@ -13,10 +13,12 @@ public static class CategoryTestHelper
         using (var scope = appFactory.Services.CreateScope())
         {
             var categoryRepo = scope.ServiceProvider.GetRequiredService<ICategoriesRepository>();
+            var unitofWork = scope.ServiceProvider.GetRequiredService<IUnitofWork>();
 
             foreach(var category in categories) 
             {
                 await categoryRepo.AddCategoryAsync(category);
+                await unitofWork.CommitChangesAsync();
             }
 
         }
