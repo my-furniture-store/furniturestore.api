@@ -31,7 +31,9 @@ public class CategoriesRepository : ICategoriesRepository
 
     public async Task<Category?> GetByIdAsync(Guid categoryId)
     {
-        return await _dbContext.Categories.FirstOrDefaultAsync(category => category.Id == categoryId);
+        return await _dbContext.Categories
+            .Include(category => category.SubCategories)
+            .FirstOrDefaultAsync(category => category.Id == categoryId);
     }
 
     public Task RemoveCategoryAsync(Category category)

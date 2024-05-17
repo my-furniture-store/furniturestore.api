@@ -9,10 +9,11 @@ public class FurnitureStoreDbContext : DbContext, IUnitofWork
 {
     public FurnitureStoreDbContext(DbContextOptions<FurnitureStoreDbContext> options) : base(options)
     {
-        
+
     }
 
     public DbSet<Category> Categories { get; set; }
+    public DbSet<SubCategory> SubCategories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
