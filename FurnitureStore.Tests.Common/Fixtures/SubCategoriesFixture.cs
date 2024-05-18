@@ -1,6 +1,7 @@
-﻿using FurnitureStore.Domain.SubCategories;
+﻿
+using FurnitureStore.Domain.SubCategories;
 
-namespace FurnitureStore.Domain.Tests.Unit.Fixtures;
+namespace FurnitureStore.Tests.Common.Fixtures;
 
 public static class SubCategoriesFixture
 {

@@ -1,9 +1,8 @@
-﻿using ErrorOr;
-using FluentAssertions;
+﻿using FluentAssertions;
 using FurnitureStore.Domain.Categories;
 using FurnitureStore.Domain.SubCategories;
-using FurnitureStore.Domain.Tests.Unit.Fixtures;
 using FurnitureStore.Domain.Tests.Unit.Helpers;
+using FurnitureStore.Tests.Common.Fixtures;
 
 namespace FurnitureStore.Domain.Tests.Unit.System.Categories;
 
