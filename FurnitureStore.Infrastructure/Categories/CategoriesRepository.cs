@@ -26,7 +26,9 @@ public class CategoriesRepository : ICategoriesRepository
 
     public async Task<List<Category>> GetAllCategoriesAsync()
     {
-        return await _dbContext.Categories.ToListAsync();
+        return await _dbContext.Categories
+            .Include(category => category.SubCategories)
+            .ToListAsync();
     }
 
     public async Task<Category?> GetByIdAsync(Guid categoryId)

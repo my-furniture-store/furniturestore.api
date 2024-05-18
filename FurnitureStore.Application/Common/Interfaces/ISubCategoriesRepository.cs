@@ -1,4 +1,4 @@
-﻿using FurnitureStore.Domain.Categories;
+﻿using FurnitureStore.Domain.SubCategories;
 
 namespace FurnitureStore.Application.Common.Interfaces;
 

@@ -1,6 +1,6 @@
 ﻿using ErrorOr;
 using FurnitureStore.Application.Common.Interfaces;
-using FurnitureStore.Domain.Categories;
+using FurnitureStore.Domain.SubCategories;
 using MediatR;
 
 namespace FurnitureStore.Application.SubCategories.Commands.CreateSubCategory;

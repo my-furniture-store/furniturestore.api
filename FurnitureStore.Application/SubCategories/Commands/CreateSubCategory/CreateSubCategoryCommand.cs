@@ -1,5 +1,5 @@
 ﻿using ErrorOr;
-using FurnitureStore.Domain.Categories;
+using FurnitureStore.Domain.SubCategories;
 using MediatR;
 
 namespace FurnitureStore.Application.SubCategories.Commands.CreateSubCategory;

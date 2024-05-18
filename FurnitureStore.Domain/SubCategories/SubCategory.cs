@@ -1,4 +1,6 @@
-﻿namespace FurnitureStore.Domain.Categories;
+﻿using FurnitureStore.Domain.Categories;
+
+namespace FurnitureStore.Domain.SubCategories;
 
 public class SubCategory
 {
