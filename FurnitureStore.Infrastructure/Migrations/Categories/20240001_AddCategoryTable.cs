@@ -3,7 +3,7 @@
 namespace FurnitureStore.Infrastructure.Migrations.Categories;
 
 [Migration(2024001, description: "Add Category Table")]
-public class AddCategoryTable : Migration
+public class AddCategoryTable : AutoReversingMigration
 {
     public override void Up()
     {
@@ -11,8 +11,5 @@ public class AddCategoryTable : Migration
             .WithColumn("id").AsGuid().PrimaryKey()
             .WithColumn("name").AsString(50).NotNullable();
     }
-    public override void Down()
-    {
-        Delete.Table("category");
-    }
+   
 }

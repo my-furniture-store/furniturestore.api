@@ -11,13 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{59CCDE64
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureStore.API.Tests.Integration", "FurnitureStore.API.Tests.Integration\FurnitureStore.API.Tests.Integration.csproj", "{CF53EBCA-B8D1-40CD-A324-95A4FAE2DC89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Domain", "FurnitureStore.Domain\FurnitureStore.Domain.csproj", "{B3C33BDC-85AC-444E-A7F7-0B7707C040F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureStore.Domain", "FurnitureStore.Domain\FurnitureStore.Domain.csproj", "{B3C33BDC-85AC-444E-A7F7-0B7707C040F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Application", "FurnitureStore.Application\FurnitureStore.Application.csproj", "{805AFE2A-323B-4E3F-BD3F-A3D6BBF70888}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureStore.Application", "FurnitureStore.Application\FurnitureStore.Application.csproj", "{805AFE2A-323B-4E3F-BD3F-A3D6BBF70888}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Infrastructure", "FurnitureStore.Infrastructure\FurnitureStore.Infrastructure.csproj", "{4D823A66-EF12-46DE-AB88-6D1BDE762393}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureStore.Infrastructure", "FurnitureStore.Infrastructure\FurnitureStore.Infrastructure.csproj", "{4D823A66-EF12-46DE-AB88-6D1BDE762393}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Contracts", "FurnitureStore.Contracts\FurnitureStore.Contracts.csproj", "{C601E4C4-4CAB-467C-8F93-46CFF77C5210}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureStore.Contracts", "FurnitureStore.Contracts\FurnitureStore.Contracts.csproj", "{C601E4C4-4CAB-467C-8F93-46CFF77C5210}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Domain.Tests.Unit", "FurnitureStore.Domain.Tests.Unit\FurnitureStore.Domain.Tests.Unit.csproj", "{3878BA39-D441-4A98-8A28-245BB3B33DE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Application.Tests.Unit", "FurnitureStore.Application.Tests.Unit\FurnitureStore.Application.Tests.Unit.csproj", "{FBAED9A9-64AD-418D-AA99-1CACB18A77C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Tests.Common", "FurnitureStore.Tests.Common\FurnitureStore.Tests.Common.csproj", "{0EF748BD-EC90-4748-ACB6-D2671378EC4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,18 @@ Global
 		{C601E4C4-4CAB-467C-8F93-46CFF77C5210}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C601E4C4-4CAB-467C-8F93-46CFF77C5210}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C601E4C4-4CAB-467C-8F93-46CFF77C5210}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3878BA39-D441-4A98-8A28-245BB3B33DE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3878BA39-D441-4A98-8A28-245BB3B33DE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3878BA39-D441-4A98-8A28-245BB3B33DE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3878BA39-D441-4A98-8A28-245BB3B33DE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBAED9A9-64AD-418D-AA99-1CACB18A77C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBAED9A9-64AD-418D-AA99-1CACB18A77C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBAED9A9-64AD-418D-AA99-1CACB18A77C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBAED9A9-64AD-418D-AA99-1CACB18A77C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EF748BD-EC90-4748-ACB6-D2671378EC4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EF748BD-EC90-4748-ACB6-D2671378EC4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EF748BD-EC90-4748-ACB6-D2671378EC4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EF748BD-EC90-4748-ACB6-D2671378EC4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +78,9 @@ Global
 		{805AFE2A-323B-4E3F-BD3F-A3D6BBF70888} = {3A66B0CA-7F31-4C53-97BE-FBC3065F821F}
 		{4D823A66-EF12-46DE-AB88-6D1BDE762393} = {3A66B0CA-7F31-4C53-97BE-FBC3065F821F}
 		{C601E4C4-4CAB-467C-8F93-46CFF77C5210} = {3A66B0CA-7F31-4C53-97BE-FBC3065F821F}
+		{3878BA39-D441-4A98-8A28-245BB3B33DE8} = {59CCDE64-17BA-4899-BECF-0A1E4EBE3DC7}
+		{FBAED9A9-64AD-418D-AA99-1CACB18A77C8} = {59CCDE64-17BA-4899-BECF-0A1E4EBE3DC7}
+		{0EF748BD-EC90-4748-ACB6-D2671378EC4E} = {59CCDE64-17BA-4899-BECF-0A1E4EBE3DC7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CE62451-B7E9-4051-AEF0-57D87E248F1C}

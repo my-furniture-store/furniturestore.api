@@ -12,6 +12,10 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 
         builder.HasKey(category => category.Id);
 
+        builder.HasMany(category => category.SubCategories)
+            .WithOne(subCategory => subCategory.Category)
+            .HasForeignKey(subCategory => subCategory.CategoryId);
+
         builder.Property(category => category.Id)
             .HasColumnName("id")
             .HasColumnType("guid")
