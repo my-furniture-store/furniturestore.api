@@ -38,8 +38,8 @@ public class ListCategoriesQueryHandlerTests
     public async Task Handle_ShouldReturnListOfCategories_WhenCategoriesExist()
     {
         // Arrange
-        var categoriesCount = CategoriesFixture.GetTestCategories.Count;
-        _categoriesRepository.GetAllCategoriesAsync().Returns(CategoriesFixture.GetTestCategories);
+        var categoriesCount = CategoriesFixture.GetTestCategories().Count;
+        _categoriesRepository.GetAllCategoriesAsync().Returns(CategoriesFixture.GetTestCategories());
         var query = new ListCategoriesQuery();
 
         // Act

@@ -25,7 +25,7 @@ public class UpdateCategoryCommandHandlerTests
     {
         // Arrange
         var newName = "Beds";
-        var category = CategoriesFixture.GetTestCategories[0];
+        var category = CategoriesFixture.GetTestCategories()[0];
         var updateCommand = new UpdateCategoryCommand(category.Id, newName);
 
         // Act

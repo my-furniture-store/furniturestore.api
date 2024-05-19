@@ -40,7 +40,7 @@ public class GetCategoryQueryHandlerTests
     public async Task Handle_ShouldReturnCategory_WhenCategoryExists()
     {
         // Arrange
-        var category = CategoriesFixture.GetTestCategories[0];
+        var category = CategoriesFixture.GetTestCategories()[0];
         var query = new GetCategoryQuery(category.Id);
 
         // Act
