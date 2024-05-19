@@ -14,6 +14,7 @@ public static class MockCategoriesRepository
         mockRepo.GetAllCategoriesAsync().Returns(CategoriesFixture.GetTestCategories);
         mockRepo.AddCategoryAsync(Arg.Do<Category>(CategoriesFixture.GetTestCategories.Add));
         mockRepo.GetByIdAsync(Arg.Any<Guid>()).Returns(x => CategoriesFixture.GetTestCategories.FirstOrDefault(c => c.Id == x.Arg<Guid>()));
+        mockRepo.ExistsAsync(Arg.Any<Guid>()).Returns(x => CategoriesFixture.GetTestCategories.Any(c => c.Id == x.Arg<Guid>()));
         return mockRepo;
     }
 }

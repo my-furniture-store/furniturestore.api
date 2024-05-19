@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using FurnitureStore.Application.Categories.Commands.DeleteCategory;
 using FurnitureStore.Application.Categories.Commands.UpdateCategory;
 using FurnitureStore.Application.Common.Interfaces;
 using FurnitureStore.Application.Tests.Unit.Mocks;
