@@ -4,7 +4,7 @@ using MediatR;
 
 namespace FurnitureStore.Application.SubCategories.Commands.DeleteSubCategory;
 
-internal class DeleteSubCategoryCommandHandler : IRequestHandler<DeleteSubCategoryCommand, ErrorOr<Deleted>>
+public class DeleteSubCategoryCommandHandler : IRequestHandler<DeleteSubCategoryCommand, ErrorOr<Deleted>>
 {
     private readonly ICategoriesRepository _categoriesRepository;
     private readonly ISubCategoriesRepository _subCategoriesRepository;
@@ -19,7 +19,7 @@ internal class DeleteSubCategoryCommandHandler : IRequestHandler<DeleteSubCatego
 
     public async Task<ErrorOr<Deleted>> Handle(DeleteSubCategoryCommand request, CancellationToken cancellationToken)
     {
-        var subCategory = await _subCategoriesRepository.GetByIdAsync(request.Id);
+        var subCategory = await _subCategoriesRepository.GetByIdAsync(request.SubCategoryId);
 
         if(subCategory is null)
         {
@@ -33,7 +33,7 @@ internal class DeleteSubCategoryCommandHandler : IRequestHandler<DeleteSubCatego
             return Error.NotFound(description: "Category not found.");
         }
 
-        if(!category.HasSubCategory(request.Id))
+        if(!category.HasSubCategory(request.SubCategoryId))
         {
             return Error.NotFound(description: "Sub-category not found.");
         }

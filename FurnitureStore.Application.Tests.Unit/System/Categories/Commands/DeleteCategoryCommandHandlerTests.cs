@@ -6,7 +6,6 @@ using FurnitureStore.Application.Tests.Unit.Mocks;
 using FurnitureStore.Domain.Categories;
 using FurnitureStore.Tests.Common.Fixtures;
 using NSubstitute;
-using OneOf.Types;
 
 namespace FurnitureStore.Application.Tests.Unit.System.Categories.Commands;
 
@@ -26,7 +25,7 @@ public class DeleteCategoryCommandHandlerTests
     public async Task Handle_ShouldDeleteCategory_WhenCategoryExists()
     {
         // Arrange
-        var category = CategoriesFixture.GetTestCategories[0];
+        var category = CategoriesFixture.GetTestCategories()[0];
         var deleteCommand = new DeleteCategoryCommand(category.Id);
 
         // Act

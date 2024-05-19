@@ -18,7 +18,7 @@ public class GetCategoryQueryHandler : IRequestHandler<GetCategoryQuery, ErrorOr
     {
         if (!await _categoriesRepository.ExistsAsync(request.CategoryId))
         {
-            return Error.NotFound("Subscription not found");
+            return Error.NotFound(description:"Category not found.");
         }
 
         var category = await _categoriesRepository.GetByIdAsync(request.CategoryId);

@@ -50,7 +50,10 @@ public class GetCategoriesControllerTests : IAsyncLifetime
         response.StatusCode.Should().Be(HttpStatusCode.OK);
 
         var categoryResponse = await HttpResponseHelper.ReadFromResponse<CategoryResponse>(response);
-        categoryResponse!.Should().BeEquivalentTo(category);
+        categoryResponse!.Should().NotBeNull();
+        categoryResponse!.Should().BeOfType<CategoryResponse>();
+        categoryResponse!.Name.Should().Be(category.Name);
+        categoryResponse!.Id.Should().Be(category.Id);
     }
 
     public Task InitializeAsync() => Task.CompletedTask;

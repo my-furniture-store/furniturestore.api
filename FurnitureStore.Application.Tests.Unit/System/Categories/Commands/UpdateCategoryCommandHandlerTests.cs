@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using FurnitureStore.Application.Categories.Commands.DeleteCategory;
 using FurnitureStore.Application.Categories.Commands.UpdateCategory;
 using FurnitureStore.Application.Common.Interfaces;
 using FurnitureStore.Application.Tests.Unit.Mocks;
@@ -26,7 +25,7 @@ public class UpdateCategoryCommandHandlerTests
     {
         // Arrange
         var newName = "Beds";
-        var category = CategoriesFixture.GetTestCategories[0];
+        var category = CategoriesFixture.GetTestCategories()[0];
         var updateCommand = new UpdateCategoryCommand(category.Id, newName);
 
         // Act
