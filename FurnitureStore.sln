@@ -19,11 +19,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureStore.Infrastructu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureStore.Contracts", "FurnitureStore.Contracts\FurnitureStore.Contracts.csproj", "{C601E4C4-4CAB-467C-8F93-46CFF77C5210}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Domain.Tests.Unit", "FurnitureStore.Domain.Tests.Unit\FurnitureStore.Domain.Tests.Unit.csproj", "{3878BA39-D441-4A98-8A28-245BB3B33DE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureStore.Domain.Tests.Unit", "FurnitureStore.Domain.Tests.Unit\FurnitureStore.Domain.Tests.Unit.csproj", "{3878BA39-D441-4A98-8A28-245BB3B33DE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Application.Tests.Unit", "FurnitureStore.Application.Tests.Unit\FurnitureStore.Application.Tests.Unit.csproj", "{FBAED9A9-64AD-418D-AA99-1CACB18A77C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureStore.Application.Tests.Unit", "FurnitureStore.Application.Tests.Unit\FurnitureStore.Application.Tests.Unit.csproj", "{FBAED9A9-64AD-418D-AA99-1CACB18A77C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FurnitureStore.Tests.Common", "FurnitureStore.Tests.Common\FurnitureStore.Tests.Common.csproj", "{0EF748BD-EC90-4748-ACB6-D2671378EC4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FurnitureStore.Tests.Common", "FurnitureStore.Tests.Common\FurnitureStore.Tests.Common.csproj", "{0EF748BD-EC90-4748-ACB6-D2671378EC4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{50D66AD8-EAEB-4E1A-ACEE-47D68EA5C233}"
+	ProjectSection(SolutionItems) = preProject
+		Furniture Store.postman_collection.json = Furniture Store.postman_collection.json
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
