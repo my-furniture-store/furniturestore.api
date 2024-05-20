@@ -58,12 +58,13 @@ supporting various operations needed to run an online furniture store efficientl
 5. **Run the application with docker:**
     ```bash
     cd ./FurnitureStore.API/
+    dotnet dev-certs https -ep cert.pfx -p Test1234!
     docker-compose build
     docker-compose up
 
 ## Usage
 ### Postman
-You can use Postman to test the API endpoints.
+You can use Postman to test the API endpoints. Import the provided Postman collection.
 
 ### Swagger
 The API includes Swagge UI for easy testing and exploration. Once the application is running, navigate to https://localhost:7000/swagger/index.html   
