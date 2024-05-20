@@ -1,10 +1,6 @@
-﻿using FluentAssertions;
-using FurnitureStore.Application.Categories.Commands.UpdateCategory;
-using FurnitureStore.Application.Common.Interfaces;
+﻿using FurnitureStore.Application.Categories.Commands.UpdateCategory;
 using FurnitureStore.Application.Tests.Unit.Mocks;
 using FurnitureStore.Domain.Categories;
-using FurnitureStore.Tests.Common.Fixtures;
-using NSubstitute;
 
 namespace FurnitureStore.Application.Tests.Unit.System.Categories.Commands;
 
