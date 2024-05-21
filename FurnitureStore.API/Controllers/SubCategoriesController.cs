@@ -67,7 +67,7 @@ public class SubCategoriesController : ApiController
         var command = new UpdateSubCategoryCommand(
             CategoryId: categoryId,
             SubCategoryId: subCategoryId,
-            NewName: request.NewName);
+            NewName: request.Name);
 
         var updateSubCategoryResult = await _mediator.Send(command);
 

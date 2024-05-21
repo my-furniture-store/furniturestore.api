@@ -1,6 +1,4 @@
-﻿
-
-using FurnitureStore.Contracts.Categories;
+﻿using FurnitureStore.Contracts.Categories;
 using FurnitureStore.Domain.Categories;
 using Microsoft.AspNetCore.Mvc;
 

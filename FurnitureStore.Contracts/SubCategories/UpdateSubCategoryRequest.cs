@@ -2,5 +2,5 @@
 
 namespace FurnitureStore.Contracts.SubCategories;
 
-public record UpdateSubCategoryRequest([Required][StringLength(25)] string NewName);
+public record UpdateSubCategoryRequest([Required][StringLength(25)] string Name);
 

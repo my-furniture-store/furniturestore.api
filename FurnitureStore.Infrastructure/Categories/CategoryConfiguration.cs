@@ -14,7 +14,8 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
 
         builder.HasMany(category => category.SubCategories)
             .WithOne(subCategory => subCategory.Category)
-            .HasForeignKey(subCategory => subCategory.CategoryId);
+            .HasForeignKey(subCategory => subCategory.CategoryId)
+            .OnDelete(DeleteBehavior.SetNull);
 
         builder.Property(category => category.Id)
             .HasColumnName("id")
