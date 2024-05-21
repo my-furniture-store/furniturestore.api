@@ -24,6 +24,11 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
             return Error.NotFound(description: "Category not found.");
         }
 
+        if(category.SubCategories!.Any())
+        {
+            return Error.Conflict(description: "Can't delete category with associated sub-categories.");
+        }
+
         await _categoriesRepository.RemoveCategoryAsync(category);
         await _unitofWork.CommitChangesAsync();
 

@@ -8,10 +8,7 @@ namespace FurnitureStore.API.Tests.Integration.Controllers.CategoriesController;
 public class GetCategoriesControllerTests : IAsyncLifetime
 {
     private readonly FurnistoreApiFactory _appFactory;
-    private readonly HttpClient _httpClient;
-    private readonly Faker<Category> _categoryGenerator = new Faker<Category>()
-        .RuleFor(c => c.Id, faker => Guid.NewGuid())
-        .RuleFor(c => c.Name, faker => faker.Commerce.Categories(1)[0]);
+    private readonly HttpClient _httpClient;    
 
     public GetCategoriesControllerTests(FurnistoreApiFactory appFactory)
     {
@@ -21,7 +18,7 @@ public class GetCategoriesControllerTests : IAsyncLifetime
 
 
     [Fact]
-    public async Task Get_ReturnsNotFound_WhenCustomerDoesNotExist()
+    public async Task Get_ReturnsNotFound_WhenCategoryDoesNotExist()
     {
         // Act
         HttpResponseMessage response = await _httpClient.GetAsync($"api/categories/{Guid.NewGuid()}");
