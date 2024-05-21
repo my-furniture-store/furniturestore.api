@@ -31,7 +31,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"To be Deleted\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Chairs\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -130,6 +130,141 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "SubCategories",
+			"item": [
+				{
+					"name": "all sub-categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/api/categories/bea9dec4-033a-4cef-9a04-3d67fc8cc000/subcategories",
+							"path": [
+								"api",
+								"categories",
+								"bea9dec4-033a-4cef-9a04-3d67fc8cc000",
+								"subcategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sub-category by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/api/categories/bea9dec4-033a-4cef-9a04-3d67fc8cc000/subcategories/",
+							"path": [
+								"api",
+								"categories",
+								"bea9dec4-033a-4cef-9a04-3d67fc8cc000",
+								"subcategories",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create sub-category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"To be updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/api/categories/bea9dec4-033a-4cef-9a04-3d67fc8cc000/subcategories",
+							"path": [
+								"api",
+								"categories",
+								"bea9dec4-033a-4cef-9a04-3d67fc8cc000",
+								"subcategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update sub-category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newname\":\"To be Deleted\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/api/categories/bea9dec4-033a-4cef-9a04-3d67fc8cc000/subcategories/de825692-9318-40ff-9a28-d2ec82e9d27e",
+							"path": [
+								"api",
+								"categories",
+								"bea9dec4-033a-4cef-9a04-3d67fc8cc000",
+								"subcategories",
+								"de825692-9318-40ff-9a28-d2ec82e9d27e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete sub-category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "/api/categories/bea9dec4-033a-4cef-9a04-3d67fc8cc000/subcategories/3a141d82-8270-43ad-affe-28da13c984a3",
+							"path": [
+								"api",
+								"categories",
+								"bea9dec4-033a-4cef-9a04-3d67fc8cc000",
+								"subcategories",
+								"3a141d82-8270-43ad-affe-28da13c984a3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"const baseUrl = pm.variables.get(\"baseUrl\");\r",
+							"\r",
+							"pm.request.url.host = `${baseUrl}`;"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
 		}
 	],
 	"event": [
@@ -162,13 +297,13 @@
 		{
 			"key": "baseUrl",
 			"value": "https://localhost:7000",
-			"type": "string",
-			"disabled": true
+			"type": "string"
 		},
 		{
 			"key": "baseUrl",
 			"value": "https://localhost:7070",
-			"type": "string"
+			"type": "string",
+			"disabled": true
 		}
 	]
 }
