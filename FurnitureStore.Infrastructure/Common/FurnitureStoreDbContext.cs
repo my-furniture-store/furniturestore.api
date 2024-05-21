@@ -2,6 +2,7 @@
 using FurnitureStore.Domain.Categories;
 using FurnitureStore.Domain.SubCategories;
 using Microsoft.EntityFrameworkCore;
+using SmartEnum.EFCore;
 using System.Reflection;
 
 namespace FurnitureStore.Infrastructure.Common;
@@ -20,6 +21,13 @@ public class FurnitureStoreDbContext : DbContext, IUnitofWork
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(modelBuilder);
+    }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        base.ConfigureConventions(configurationBuilder);
+
+        configurationBuilder.ConfigureSmartEnum();
     }
 
     public async Task CommitChangesAsync()
