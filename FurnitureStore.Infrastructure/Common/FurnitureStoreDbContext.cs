@@ -1,5 +1,6 @@
 ﻿using FurnitureStore.Application.Common.Interfaces;
 using FurnitureStore.Domain.Categories;
+using FurnitureStore.Domain.Products;
 using FurnitureStore.Domain.SubCategories;
 using Microsoft.EntityFrameworkCore;
 using SmartEnum.EFCore;
@@ -16,6 +17,7 @@ public class FurnitureStoreDbContext : DbContext, IUnitofWork
 
     public DbSet<Category> Categories { get; set; }
     public DbSet<SubCategory> SubCategories { get; set; }
+    public DbSet<Product> Products { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

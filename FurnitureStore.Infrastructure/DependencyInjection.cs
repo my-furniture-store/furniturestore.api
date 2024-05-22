@@ -2,6 +2,7 @@
 using FurnitureStore.Application.Common.Interfaces;
 using FurnitureStore.Infrastructure.Categories;
 using FurnitureStore.Infrastructure.Common;
+using FurnitureStore.Infrastructure.Products;
 using FurnitureStore.Infrastructure.SubCategories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,7 @@ public static class DependencyInjection
         services.AddNpgsql<FurnitureStoreDbContext>(connectionString)
                 .AddScoped<ICategoriesRepository, CategoriesRepository>()
                 .AddScoped<ISubCategoriesRepository, SubCategoriesRepository>()
+                .AddScoped<IProductsRepository, ProductsRepository>()
                 .AddScoped<IUnitofWork>(serviceProvider => serviceProvider.GetRequiredService<FurnitureStoreDbContext>());
 
         // Configure FluentMigrator

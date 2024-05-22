@@ -8,14 +8,14 @@ public class Product
 {
 
     #region Constructors
-    public Product(string name, decimal price, Guid categoryId, Guid subCategoryId, Guid? id = null)
+    public Product(string name, decimal price, Guid categoryId, Guid subCategoryId, Guid? id = null, bool isFeatured = false)
     {
         Id = id ?? Guid.NewGuid();
         Name = name;
         Price = price;
         CategoryId = categoryId;
         SubCategoryId = subCategoryId;
-        IsFeatured = false;
+        IsFeatured = isFeatured;
         DateAdded = DateTime.Now;
         Colors = new();
         Status = ProductStatus.Active;
