@@ -14,7 +14,13 @@ public class SubCategoryConfiguration : IEntityTypeConfiguration<SubCategory>
 
         builder.HasOne(subCategoy => subCategoy.Category)
             .WithMany(category => category.SubCategories)
-            .HasForeignKey(subCategory => subCategory.CategoryId);
+            .HasForeignKey(subCategory => subCategory.CategoryId)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        builder.HasMany(subCategory => subCategory.Products)
+            .WithOne(product => product.SubCategory)
+            .HasForeignKey(product => product.SubCategoryId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.Property(subCategory => subCategory.Id)
             .HasColumnName("id")

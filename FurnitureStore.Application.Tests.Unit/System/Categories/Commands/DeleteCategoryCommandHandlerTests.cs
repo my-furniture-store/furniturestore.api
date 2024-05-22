@@ -20,7 +20,7 @@ public class DeleteCategoryCommandHandlerTests
     public async Task Handle_ShouldDeleteCategory_WhenCategoryExists()
     {
         // Arrange
-        var category = CategoriesFixture.GetTestCategories()[0];
+        var category = CategoriesFixture.GetTestCategories()[1];
         var deleteCommand = new DeleteCategoryCommand(category.Id);
 
         // Act

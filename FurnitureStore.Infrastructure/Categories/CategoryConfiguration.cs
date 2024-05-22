@@ -17,6 +17,11 @@ public class CategoryConfiguration : IEntityTypeConfiguration<Category>
             .HasForeignKey(subCategory => subCategory.CategoryId)
             .OnDelete(DeleteBehavior.SetNull);
 
+        builder.HasMany(category => category.Products)
+            .WithOne(product => product.Category)
+            .HasForeignKey(product => product.CategoryId)
+            .OnDelete(DeleteBehavior.Restrict);
+
         builder.Property(category => category.Id)
             .HasColumnName("id")
             .HasColumnType("guid")

@@ -1,4 +1,5 @@
 ﻿using ErrorOr;
+using FurnitureStore.Domain.Products;
 using FurnitureStore.Domain.SubCategories;
 using Throw;
 
@@ -8,6 +9,7 @@ public class Category
 {
     #region Private Fields
     private readonly List<SubCategory> _subCategories = new();
+    private readonly List<Product> _products = new();
     #endregion Private Fields
 
     #region Constructors
@@ -24,6 +26,7 @@ public class Category
     public Guid Id { get;}
     public string Name { get; private set; } = null!;
     public IReadOnlyCollection<SubCategory>? SubCategories => _subCategories.AsReadOnly();
+    public IReadOnlyCollection<Product>? Products => _products.AsReadOnly();
     #endregion Public Properties
 
     #region Public Methods
