@@ -78,17 +78,22 @@ public class CreateProductCommandHandlerTests
     public async Task Handle_ShouldAddProduct_WhenDataIsCorrect()
     {
         // Arrange
+        var productsCount = ProductsFixture.GetListofProducts(_categoryId, _subCategoryId).Count;
         var productName = "Product Z";
         var command = new CreateProductCommand(productName, 10m, _categoryId, _subCategoryId);
 
         // Act
         var result = await _sut.Handle(command, CancellationToken.None);
+        var products = await _productsRepository.GetAllAsync();
 
         // Assert
         result.IsError.Should().BeFalse();
         result.Value.Should().NotBeNull();
         result.Value.Should().BeOfType<Product>();
         result.Value.Name.Should().Be(productName);
+
+        products.Should().HaveCount(4);
+    
         await _productsRepository.Received().AddAsync(Arg.Is<Product>(product => product.Name == productName));
 
     }
