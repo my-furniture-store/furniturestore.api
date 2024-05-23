@@ -1,78 +1,80 @@
 ﻿using FurnitureStore.Domain.Products;
+using FurnitureStore.Tests.Common.Helpers;
 
 namespace FurnitureStore.Tests.Common.Fixtures;
 
 public class ProductsFixture
 {
-    //private readonly Product _product1;
-    //private readonly Product _product2;
-    //private readonly Product _product3;
 
+    public static List<Product> GetListofProducts(Guid categoryId, Guid subCategoryId) => new()
+    {
+       new ProductBuilder()
+            .WithName("Product 1")
+            .WithPrice(50m)
+            .WithCategoryId(categoryId)
+            .WithSubCategoryId(subCategoryId)
+            .WithDescription("Description for Product 1")
+            .WithSKU("SKU001")
+            .WithStockQuantity(10)
+            .WithImageUrl("http://example.com/product1.jpg")
+            .WithDimensions("10x10x10")
+            .WithWeight(5m)
+            .WithMaterial("Wood")
+            .WithColors(new List<ProductColor>
+            {
+                new ProductColor { Name = "Red", Code = "#FF0000" },
+                new ProductColor { Name = "Blue", Code = "#0000FF" }
+            })
+            .WithBrand("Brand A")
+            .WithRating(4.5)
+            .WithDiscount(10m)
+            .WithStatus(ProductStatus.Active)
+            .Build(),
 
-    //public ProductsFixture()
-    //{
-    //    _product1 = 1;
-    //}
+        new ProductBuilder()
+            .WithName("Product 2")
+            .WithPrice(75m)
+            .WithCategoryId(categoryId)
+            .WithSubCategoryId(subCategoryId)
+            .WithDescription("Description for Product 2")
+            .WithSKU("SKU002")
+            .WithStockQuantity(0)
+            .WithImageUrl("http://example.com/product2.jpg")
+            .WithDimensions("15x15x15")
+            .WithWeight(7m)
+            .WithMaterial("Metal")
+            .WithColors(new List<ProductColor>
+            {
+                new ProductColor { Name = "Green", Code = "#00FF00" },
+                new ProductColor { Name = "Yellow", Code = "#FFFF00" }
+            })
+            .WithBrand("Brand B")
+            .WithRating(4.0)
+            .WithDiscount(5m)
+            .WithStatus(ProductStatus.OutofStock)
+            .Build(),
 
-
-    //public static List<Product> GetListOfProduct(Guid categoryId, Guid subCategoryId) => new()
-    //{
-    //    new Product("Product 1", 50m, categoryId, subCategoryId)
-    //    {
-    //        Description = "Description for Product 1",
-    //        SKU = "SKU001",
-    //        StockQuantity = 10,
-    //        ImageUrl = "http://example.com/product1.jpg",
-    //        Dimensions = "10x10x10",
-    //        Weight = 5m,
-    //        Material = "Wood",
-    //        Colors = new List<ProductColor>
-    //        {
-    //            new ProductColor { Name = "Red", Code = "#FF0000" },
-    //            new ProductColor { Name = "Blue", Code = "#0000FF" }
-    //        },
-    //        Brand = "Brand A",
-    //        Rating = 4.5,
-    //        Discount = 10m,
-    //        Status = ProductStatus.Active
-    //    },
-    //    new Product("Product 2", 75m, categoryId, subCategoryId)
-    //    {
-    //        Description = "Description for Product 2",
-    //        SKU = "SKU002",
-    //        StockQuantity = 20,
-    //        ImageUrl = "http://example.com/product2.jpg",
-    //        Dimensions = "15x15x15",
-    //        Weight = 7m,
-    //        Material = "Metal",
-    //        Colors = new List<ProductColor>
-    //        {
-    //            new ProductColor { Name = "Green", Code = "#00FF00" },
-    //            new ProductColor { Name = "Yellow", Code = "#FFFF00" }
-    //        },
-    //        Brand = "Brand B",
-    //        Rating = 4.0,
-    //        Discount = 5m,
-    //        Status = ProductStatus.Inactive
-    //    },
-    //    new Product("Product 3", 100m, categoryId, subCategoryId)
-    //    {
-    //        Description = "Description for Product 3",
-    //        SKU = "SKU003",
-    //        StockQuantity = 5,
-    //        ImageUrl = "http://example.com/product3.jpg",
-    //        Dimensions = "20x20x20",
-    //        Weight = 10m,
-    //        Material = "Plastic",
-    //        Colors = new List<ProductColor>
-    //        {
-    //            new ProductColor { Name = "Black", Code = "#000000" },
-    //            new ProductColor { Name = "White", Code = "#FFFFFF" }
-    //        },
-    //        Brand = "Brand C",
-    //        Rating = 3.5,
-    //        Discount = 15m,
-    //        Status = ProductStatus.Discontinued
-    //    }
-    //};
+        new ProductBuilder()
+            .WithName("Product 3")
+            .WithPrice(100m)
+            .WithCategoryId(categoryId)
+            .WithSubCategoryId(subCategoryId)
+            .WithDescription("Description for Product 3")
+            .WithSKU("SKU003")
+            .WithStockQuantity(5)
+            .WithImageUrl("http://example.com/product3.jpg")
+            .WithDimensions("20x20x20")
+            .WithWeight(10m)
+            .WithMaterial("Plastic")
+            .WithColors(new List<ProductColor>
+            {
+                new ProductColor { Name = "Black", Code = "#000000" },
+                new ProductColor { Name = "White", Code = "#FFFFFF" }
+            })
+            .WithBrand("Brand C")
+            .WithRating(3.5)
+            .WithDiscount(15m)
+            .WithStatus(ProductStatus.Discontinued)
+            .Build()
+    };
 }
