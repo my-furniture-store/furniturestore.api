@@ -32,6 +32,9 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
         if(subCategory is null)
             return Error.NotFound(description: "Sub-category not found.");
 
+        if(!category.HasSubCategory(subCategory.Id))
+            return Error.NotFound(description: "Sub-category not found.");
+
         var product = new Product(request.Name, request.Price, request.CategoryId, request.SubCategoryId,isFeatured:request.isFeatured);
 
         await _productsRepository.AddAsync(product);
@@ -39,4 +42,6 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
 
         return product;
     }
+
+
 }
