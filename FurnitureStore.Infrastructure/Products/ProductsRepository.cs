@@ -35,14 +35,10 @@ internal class ProductsRepository : IProductsRepository
         return Task.CompletedTask;
     }
 
-    public async Task DeleteAsync(Guid productId)
-    {
-        var product = await GetByIdAsync(productId);
-
-        if (product is null)
-            return;
-
-        _dbContext?.Products.Remove(product);        
+    public Task RemoveProductAsync(Product product)
+    {   
+        _dbContext?.Products.Remove(product);
+        return Task.CompletedTask;
     }
 
     public async Task<List<Product>> GetProductsByCategoryIdAsync(Guid categoryId)
@@ -65,77 +61,5 @@ internal class ProductsRepository : IProductsRepository
             .Where(p => p.IsFeatured)
             .ToListAsync();
     }
-
-    public async Task AddProductColorAsync(Guid productId, string colorName, string colorCode)
-    {
-        var product = await GetByIdAsync(productId);
-
-        if (product is null)
-            return;
-
-        product.AddProductColor(colorName, colorCode);
-    }
-    
-
-    public async Task SetBrandAndMaterialAsync(Guid productId, string? brand, string? material)
-    {
-        var product = await GetByIdAsync(productId);
-
-        if (product is null)
-            return;
-
-        product.SetBrandAndMaterial(brand, material);
-    }
-
-    public async Task SetDiscountAsync(Guid productId, decimal discount)
-    {
-        var product = await GetByIdAsync(productId);
-
-        if (product is null)
-            return;
-
-        product.SetDiscount(discount);
-    }
-
-    public async Task SetImageUrlAsync(Guid productId, string imageUrl)
-    {
-         var product = await GetByIdAsync(productId);
-
-        if (product is null)
-            return;
-
-        product.SetImageUrl(imageUrl);
-    }
-
-    public async Task SetProductDescriptionAsync(Guid productId, string description)
-    {
-         var product = await GetByIdAsync(productId);
-
-        if (product is null)
-            return;
-
-        product.SetProductDescription(description);
-    }
-
-    public async Task SetProductStatusAsync(Guid productId, ProductStatus status)
-    {
-         var product = await GetByIdAsync(productId);
-
-        if (product is null)
-            return;
-
-        product.UpdateProductStatus(status);
-    }
-
-    public async Task SetStockQuantityAsync(Guid productId, int quantity)
-    {
-         var product = await GetByIdAsync(productId);
-
-        if (product is null)
-            return;
-
-        product.SetStockQuantity(quantity);
-    }
-
-    
+   
 }
