@@ -9,6 +9,7 @@ public class ProductsFixture
     public static List<Product> GetListofProducts(Guid categoryId, Guid subCategoryId) => new()
     {
        new ProductBuilder()
+            .WithId(Guid.Parse("9DE397BD-46DF-4E5B-A0F3-906B9ED1CD74"))
             .WithName("Product 1")
             .WithPrice(50m)
             .WithCategoryId(categoryId)
@@ -32,6 +33,7 @@ public class ProductsFixture
             .Build(),
 
         new ProductBuilder()
+            .WithId(Guid.Parse("D58481DC-CE1B-42C7-AF6D-6FFD1FD32817"))
             .WithName("Product 2")
             .WithPrice(75m)
             .WithCategoryId(categoryId)
@@ -55,6 +57,7 @@ public class ProductsFixture
             .Build(),
 
         new ProductBuilder()
+            .WithId(Guid.Parse("0291B220-2635-40BD-8FE5-5F7CEBA6AD15"))
             .WithName("Product 3")
             .WithPrice(100m)
             .WithCategoryId(categoryId)

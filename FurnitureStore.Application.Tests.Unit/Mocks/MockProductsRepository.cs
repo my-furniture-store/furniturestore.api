@@ -13,6 +13,12 @@ public static class MockProductsRepository
 
         mockRepo.GetAllAsync().Returns(Task.FromResult(products));
 
+        mockRepo.GetByIdAsync(Arg.Any<Guid>()).Returns(x => products.FirstOrDefault(product => product.Id == x.Arg<Guid>()));
+
+        mockRepo.RemoveProductAsync(Arg.Do<Product>(p => products.Remove(p)));
+
+        mockRepo.UpdateAsync(Arg.Any<Product>()).Returns(Task.CompletedTask);
+       
         return mockRepo;
     }
 }

@@ -134,7 +134,7 @@ public class ProductBuilder
 
     public Product Build()
     {
-        var product = new Product(_name, _price, _categoryId, _subCategoryId);
+        var product = new Product(_name, _price, _categoryId, _subCategoryId,_id);
         product.GetType()!.GetProperty("Description")!.SetValue(product, _description);
         product.GetType()!.GetProperty("SKU")!.SetValue(product, _sku);
         product.GetType()!.GetProperty("StockQuantity")!.SetValue(product, _stockQuantity);
