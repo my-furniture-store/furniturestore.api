@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
-using FurnitureStore.Application.Products.Commands.CreateProduct;
 
-namespace FurnitureStore.Application.Categories.Commands.CreateCategory;
+namespace FurnitureStore.Application.Products.Commands.CreateProduct;
 
 public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {

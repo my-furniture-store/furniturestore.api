@@ -1,9 +1,13 @@
-﻿using FluentValidation;
+﻿using ErrorOr;
+using FluentValidation;
 using MediatR;
 
 namespace FurnitureStore.Application.Common.Behaviors;
 
-public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+public class RequestValidationBehavior<TRequest, TResponse> : 
+    IPipelineBehavior<TRequest, TResponse> 
+    where TRequest : IRequest<TResponse>
+    where TResponse : IErrorOr
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -18,17 +22,23 @@ public class RequestValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
         {
             return await next();
         }
+
         var context = new ValidationContext<TRequest>(request);
 
-        var failures = _validators
+        var validationFailures = _validators
             .Select(validator => validator.Validate(context))
             .SelectMany(result => result.Errors)
             .Where(f => f != null)
             .ToList();
 
-        if (failures.Any())
+        if (validationFailures.Any())
         {
-            throw new ValidationException(failures);
+            var validationErrors = validationFailures
+                .ConvertAll(failure => Error.Validation(
+                    code: failure.PropertyName,
+                    description: failure.ErrorMessage));
+
+            return validationErrors.ToTResponse<TResponse>();           
         }
 
         return await next();
