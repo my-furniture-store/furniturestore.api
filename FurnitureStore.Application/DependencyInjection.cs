@@ -2,6 +2,7 @@
 using FluentValidation;
 using MediatR;
 using FurnitureStore.Application.Common.Behaviors;
+using System.Reflection;
 
 namespace FurnitureStore.Application;
 
@@ -16,9 +17,10 @@ public static class DependencyInjection
             options.RegisterServicesFromAssemblyContaining(typeof(DependencyInjection));
         });
 
-        services.AddValidatorsFromAssembly(applicationAssembly);
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
 
         return services;
     }
