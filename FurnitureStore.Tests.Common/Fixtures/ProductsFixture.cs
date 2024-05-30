@@ -80,4 +80,29 @@ public class ProductsFixture
             .WithStatus(ProductStatus.Discontinued)
             .Build()
     };
+
+
+    public static Product CreateProduct(Product product)
+    {
+        return new ProductBuilder()
+            .WithId(product.Id)
+            .WithName(product.Name)
+            .WithPrice(product.Price)
+            .WithCategoryId(product.CategoryId)
+            .WithSubCategoryId(product.SubCategoryId)
+            .WithIsFeatured(product.IsFeatured)
+            .WithDescription(product.Description)
+            .WithSKU(product.SKU)
+            .WithStockQuantity(product.StockQuantity)
+            .WithImageUrl(product.ImageUrl)
+            .WithDimensions(product.Dimensions)
+            .WithWeight(product.Weight)
+            .WithMaterial(product.Material)
+            .WithColors(product.Colors)
+            .WithBrand(product.Brand)
+            .WithRating(product.Rating)
+            .WithDiscount(product.Discount)
+            .WithStatus(product.Status)
+            .Build();
+    }
 }

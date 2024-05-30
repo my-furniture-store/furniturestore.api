@@ -72,5 +72,21 @@ public class CreateProductCommandValidatorTests
     }
 
 
+    [Fact]
+    public void ShouldNotHaveErrors_WhenCommandIsValid()
+    {
+        // Arrange
+        var command = new CreateProductCommand(Name: "Product1", Price: 30, CategoryId: Guid.NewGuid(), SubCategoryId: Guid.NewGuid());
+
+        // Act
+        var result = _sut.TestValidate(command);
+
+        // Assert
+        result.ShouldNotHaveValidationErrorFor(c => c.Name);
+        result.ShouldNotHaveValidationErrorFor(c => c.Price);
+        result.ShouldNotHaveValidationErrorFor(c => c.CategoryId);
+        result.ShouldNotHaveValidationErrorFor(c => c.SubCategoryId);
+    }
+
 
 }

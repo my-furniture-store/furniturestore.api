@@ -17,7 +17,16 @@ public static class MockProductsRepository
 
         mockRepo.RemoveProductAsync(Arg.Do<Product>(p => products.Remove(p)));
 
-        mockRepo.UpdateAsync(Arg.Any<Product>()).Returns(Task.CompletedTask);
+        mockRepo.UpdateAsync(Arg.Any<Product>()).Returns(Task.CompletedTask).AndDoes(x =>
+        {
+            var product = x.Arg<Product>();
+
+            products.Remove(product);
+
+            var newProduct = ProductsFixture.CreateProduct(product);
+
+            products.Add(newProduct);
+        });
        
         return mockRepo;
     }

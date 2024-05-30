@@ -1,5 +1,6 @@
 ﻿using FurnitureStore.Application.SubCategories.Commands.CreateSubCategory;
 using FurnitureStore.Application.Tests.Unit.Mocks;
+using FurnitureStore.Domain.Categories;
 using FurnitureStore.Domain.SubCategories;
 
 namespace FurnitureStore.Application.Tests.Unit.System.SubCategories.Commands;
@@ -55,4 +56,21 @@ public class CreateSubCategoryCommandHandlerTests
         result.Errors[0].Description.Should().Be("Category not found.");        
     }
 
+
+    [Fact]
+    public async Task Handle_ShouldReturnError_WhenSubCategoryAlreadyExists()
+    {
+        // Arrange
+        var subCategoryName = SubCategoriesFixture.GetTestSubCategories(_categoryId)[0].Name;
+        var command = new CreateSubCategoryCommand(subCategoryName, _categoryId);
+
+        // Act
+        var result = await _sut.Handle(command, CancellationToken.None);
+
+        // Assert
+        result.IsError.Should().BeTrue();
+        result.Errors.Should().NotBeEmpty();
+        result.Errors[0].Should().Be(CategoryErrors.CannotHaveDuplicateSubCategories);
+
+    }
 }

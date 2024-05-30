@@ -1,5 +1,4 @@
-﻿using FurnitureStore.Application.Products.Commands.DeleteProduct;
-using FurnitureStore.Application.Products.Commands.SetProductDescription;
+﻿using FurnitureStore.Application.Products.Commands.SetProductDescription;
 using FurnitureStore.Application.Tests.Unit.Mocks;
 using FurnitureStore.Domain.Products;
 
