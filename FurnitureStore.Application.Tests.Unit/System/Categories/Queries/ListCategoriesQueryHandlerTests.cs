@@ -1,9 +1,5 @@
-﻿using FluentAssertions;
-using FurnitureStore.Application.Categories.Queries.ListCategories;
-using FurnitureStore.Application.Common.Interfaces;
+﻿using FurnitureStore.Application.Categories.Queries.ListCategories;
 using FurnitureStore.Domain.Categories;
-using FurnitureStore.Tests.Common.Fixtures;
-using NSubstitute;
 
 namespace FurnitureStore.Application.Tests.Unit.System.Categories.Queries;
 

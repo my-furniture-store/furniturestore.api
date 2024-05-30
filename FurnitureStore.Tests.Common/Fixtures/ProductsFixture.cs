@@ -29,6 +29,7 @@ public class ProductsFixture
             .WithBrand("Brand A")
             .WithRating(4.5)
             .WithDiscount(10m)
+            .WithIsFeatured(true)
             .WithStatus(ProductStatus.Active)
             .Build(),
 
@@ -53,6 +54,7 @@ public class ProductsFixture
             .WithBrand("Brand B")
             .WithRating(4.0)
             .WithDiscount(5m)
+            .WithIsFeatured(false)
             .WithStatus(ProductStatus.OutofStock)
             .Build(),
 
@@ -77,6 +79,7 @@ public class ProductsFixture
             .WithBrand("Brand C")
             .WithRating(3.5)
             .WithDiscount(15m)
+            .WithIsFeatured(false)
             .WithStatus(ProductStatus.Discontinued)
             .Build()
     };
