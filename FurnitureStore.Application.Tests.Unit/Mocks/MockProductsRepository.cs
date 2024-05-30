@@ -27,7 +27,16 @@ public static class MockProductsRepository
 
             products.Add(newProduct);
         });
-       
+
+
+        mockRepo.GetProductsByCategoryIdAsync(Arg.Any<Guid>())
+            .Returns(x => products.Where(product => product.CategoryId == x.Arg<Guid>()).ToList());
+
+        mockRepo.GetProductsBySubCategoryIdAsync(Arg.Any<Guid>())
+            .Returns(x => products.Where(product => product.SubCategoryId == x.Arg<Guid>()).ToList());
+
+        mockRepo.GetFeaturedProductAsync()
+            .Returns(x => products.Where(product => product.IsFeatured).ToList());
         return mockRepo;
     }
 }
