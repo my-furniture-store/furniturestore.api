@@ -103,7 +103,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         builder.Property(product => product.Rating)
             .HasColumnName("rating")
-            .HasColumnType("int")
+            .HasColumnType("decimal")
             .IsRequired(false);
 
         builder.Property(product => product.DateAdded)
@@ -125,7 +125,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .HasColumnName("status")
             .HasConversion(
                 p => p.Value,
-                p => ProductStatus.FromValue(p))
+                value => ProductStatus.FromValue(value))
             .IsRequired();
     }
 }

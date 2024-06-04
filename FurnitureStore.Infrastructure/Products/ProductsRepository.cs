@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FurnitureStore.Infrastructure.Products;
 
-internal class ProductsRepository : IProductsRepository
+public class ProductsRepository : IProductsRepository
 {
     private readonly FurnitureStoreDbContext _dbContext;
 

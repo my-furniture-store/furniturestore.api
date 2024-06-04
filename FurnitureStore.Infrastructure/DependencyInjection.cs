@@ -4,8 +4,10 @@ using FurnitureStore.Infrastructure.Categories;
 using FurnitureStore.Infrastructure.Common;
 using FurnitureStore.Infrastructure.Products;
 using FurnitureStore.Infrastructure.SubCategories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 
 namespace FurnitureStore.Infrastructure;
 
@@ -22,7 +24,14 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("FurnitureStoreDB");
 
-        services.AddNpgsql<FurnitureStoreDbContext>(connectionString)
+        var datasourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
+        datasourceBuilder.EnableDynamicJson();
+        var datasource = datasourceBuilder.Build();
+
+        services.AddDbContext<FurnitureStoreDbContext>(options =>
+                {
+                    options.UseNpgsql(datasource);
+                })
                 .AddScoped<ICategoriesRepository, CategoriesRepository>()
                 .AddScoped<ISubCategoriesRepository, SubCategoriesRepository>()
                 .AddScoped<IProductsRepository, ProductsRepository>()
@@ -37,7 +46,9 @@ public static class DependencyInjection
                 // Set the connection string
                 .WithGlobalConnectionString(connectionString)
                 // Define the assemblies containing the migrations
-                .ScanIn(typeof(DependencyInjection).Assembly).For.Migrations());
+                .ScanIn(typeof(DependencyInjection).Assembly).For.Migrations()
+                )
+            ;
 
         return services;
     }

@@ -14,6 +14,6 @@ public record CreateProductRequest(
     Guid CategoryId,
     [Required]
     Guid SubCategoryId,
-    bool IsFeatured
+    bool IsFeatured = false
     );
 
