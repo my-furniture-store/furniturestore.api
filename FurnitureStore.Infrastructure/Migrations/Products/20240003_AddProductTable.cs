@@ -3,7 +3,7 @@
 namespace FurnitureStore.Infrastructure.Migrations.Products;
 
 [Migration(20240003, description: "Add product table")]
-internal class AddProductTable : AutoReversingMigration
+public class AddProductTable : AutoReversingMigration
 {
     public override void Up()
     {

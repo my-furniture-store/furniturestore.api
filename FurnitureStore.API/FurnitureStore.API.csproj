@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Utils\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FurnitureStore.Application\FurnitureStore.Application.csproj" />
     <ProjectReference Include="..\FurnitureStore.Contracts\FurnitureStore.Contracts.csproj" />
     <ProjectReference Include="..\FurnitureStore.Infrastructure\FurnitureStore.Infrastructure.csproj" />

@@ -1,13 +1,16 @@
 ﻿using FurnitureStore.Application.Common.Interfaces;
 using FurnitureStore.Infrastructure.Categories;
 using FurnitureStore.Infrastructure.Common;
+using FurnitureStore.Infrastructure.Products;
 using FurnitureStore.Infrastructure.SubCategories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using Npgsql;
 using Testcontainers.PostgreSql;
 
 namespace FurnitureStore.API.Tests.Integration;
@@ -33,9 +36,18 @@ public class FurnistoreApiFactory : WebApplicationFactory<IApiMarker>, IAsyncLif
         builder.ConfigureTestServices(services =>
         {
             services.RemoveAll(typeof(FurnitureStoreDbContext));
-            services.AddNpgsql<FurnitureStoreDbContext>(_dbContainer.GetConnectionString())
+
+            var dataSourceBuilder = new NpgsqlDataSourceBuilder(_dbContainer.GetConnectionString());
+            dataSourceBuilder.EnableDynamicJson();
+            var dataSource = dataSourceBuilder.Build();
+            
+            services.AddDbContext<FurnitureStoreDbContext>(options =>
+            {
+                options.UseNpgsql(dataSource);
+            })
             .AddScoped<ICategoriesRepository, CategoriesRepository>()
             .AddScoped<ISubCategoriesRepository, SubCategoriesRepository>()
+            .AddScoped<IProductsRepository, ProductsRepository>()
             .AddScoped<IUnitofWork>(serviceProvider => serviceProvider.GetRequiredService<FurnitureStoreDbContext>());
             
         });

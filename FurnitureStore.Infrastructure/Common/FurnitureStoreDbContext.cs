@@ -12,7 +12,7 @@ public class FurnitureStoreDbContext : DbContext, IUnitofWork
 {
     public FurnitureStoreDbContext(DbContextOptions<FurnitureStoreDbContext> options) : base(options)
     {
-
+        
     }
 
     public DbSet<Category> Categories { get; set; }
