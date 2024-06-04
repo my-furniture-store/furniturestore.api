@@ -176,7 +176,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Coffee Table\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Dining Table\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -184,11 +184,11 @@
 							}
 						},
 						"url": {
-							"raw": "/api/categories/4815e09a-38a0-4fbf-861f-2fc0f98bb712/subcategories",
+							"raw": "/api/categories/567b09b2-ccc6-43c8-83d6-a01a911ceeb2/subcategories",
 							"path": [
 								"api",
 								"categories",
-								"4815e09a-38a0-4fbf-861f-2fc0f98bb712",
+								"567b09b2-ccc6-43c8-83d6-a01a911ceeb2",
 								"subcategories"
 							]
 						}
@@ -235,6 +235,90 @@
 								"bea9dec4-033a-4cef-9a04-3d67fc8cc000",
 								"subcategories",
 								"3a141d82-8270-43ad-affe-28da13c984a3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"const baseUrl = pm.variables.get(\"baseUrl\");\r",
+							"\r",
+							"pm.request.url.host = `${baseUrl}`;"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "get product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/api/products/95d85fc0-ae8b-4967-9e46-25ae2a13526f",
+							"path": [
+								"api",
+								"products",
+								"95d85fc0-ae8b-4967-9e46-25ae2a13526f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list all products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/api/products",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Walnut Round Dining Table\",\r\n    \"price\": 26.00,\r\n    \"categoryId\":\"4815e09a-38a0-4fbf-861f-2fc0f98bb712\",\r\n    \"subCategoryId\":\"75491705-aada-4fb3-9694-c01a3dac776e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/api/products",
+							"path": [
+								"api",
+								"products"
 							]
 						}
 					},
