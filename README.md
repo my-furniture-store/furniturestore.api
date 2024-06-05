@@ -76,12 +76,13 @@ to access the Swagger UI.
 - **POST** `api/auth/login` - Authentication a user and retrieve token.
 
 ### Products
-#### Products *(Coming soon)*
+#### Products
 - **GET** `/api/products` - Retrieve all products. 
 - **GET** `/api/products/{id}` - Retrieve a product by ID. 
 - **POST** `/api/products` - Add a new product. 
 - **PUT** `/api/products/{id}` - Update an existing product.
 - **DELETE** `/api/products/{id}` - Delete a product.
+
 #### Categories & Sub-Categories
 - **GET** `/api/categories` - Retrieve all categories. 
 - **GET** `/api/categories/{id}` - Retrieve a category by ID. 
@@ -93,6 +94,9 @@ to access the Swagger UI.
 - **POST** `/api/categories/{categoryId}/subcategories` - Add a new sub-category to a category specified by category ID. 
 - **PUT** `/api/categories/{categoryId}/subcategories/{id}` - Update an existing sub-category.
 - **DELETE** `/api/categories/{categoryId}/subcategories/{id}` - Delete a subcategory.
+
+- **GET** `/api/categories/{categoryId}/product` - Retrieve all products in the same category specified by categoryId
+- **GET** `/api/categories/{categoryId}/subCategories/{subCategoryId}/product` - Retrieve all products in the same subcategory specified by subCategoryId
 
 ### Sales *(Coming soon)*
 - **GET** `/api/sales` - Retrieve all sales.

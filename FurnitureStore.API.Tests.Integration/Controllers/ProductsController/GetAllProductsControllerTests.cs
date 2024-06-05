@@ -61,7 +61,7 @@ public class GetAllProductsControllerTests : IAsyncLifetime
     public async Task DisposeAsync()
     {
         await ProductTestHelper.ClearAllProducts(_appFactory);
-        await SubCategoryTestHelper.ClearAllCategories(_appFactory);
+        await SubCategoryTestHelper.ClearAllSubCategories(_appFactory);
         await CategoryTestHelper.ClearAllCategories(_appFactory);
     }
 }

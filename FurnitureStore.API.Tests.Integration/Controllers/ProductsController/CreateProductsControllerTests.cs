@@ -1,9 +1,6 @@
-﻿
-using FurnitureStore.Contracts.Categories;
-using FurnitureStore.Contracts.Products;
+﻿using FurnitureStore.Contracts.Products;
 using FurnitureStore.Tests.Common.Fixtures;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace FurnitureStore.API.Tests.Integration.Controllers.ProductsController;
 
@@ -144,20 +141,18 @@ public class CreateProductsControllerTests : IAsyncLifetime
     }
 
 
-
     public async Task InitializeAsync()
     {
         await ProductTestHelper.ClearAllProducts(_appFactory);
-        await SubCategoryTestHelper.ClearAllCategories(_appFactory);
+        await SubCategoryTestHelper.ClearAllSubCategories(_appFactory);
         await CategoryTestHelper.ClearAllCategories(_appFactory);
     }
 
     public async Task DisposeAsync()
     {
         await ProductTestHelper.ClearAllProducts(_appFactory);
-        await SubCategoryTestHelper.ClearAllCategories(_appFactory);
+        await SubCategoryTestHelper.ClearAllSubCategories(_appFactory);
         await CategoryTestHelper.ClearAllCategories(_appFactory);
     }
-
      
 }

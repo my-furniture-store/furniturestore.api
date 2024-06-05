@@ -24,7 +24,7 @@ public static class SubCategoryTestHelper
         }
     }
 
-    public static async Task ClearAllCategories(FurnistoreApiFactory appFactory)
+    public static async Task ClearAllSubCategories(FurnistoreApiFactory appFactory)
     {
         using (var scope = appFactory.Services.CreateScope())
         {

@@ -31,7 +31,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"table\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Sofas\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -104,6 +104,23 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "all products in category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/api/categories/cf47b160-df9d-4186-8335-6a346bd89cb0/products",
+							"path": [
+								"api",
+								"categories",
+								"cf47b160-df9d-4186-8335-6a346bd89cb0",
+								"products"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [
@@ -140,11 +157,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "/api/categories/4815e09a-38a0-4fbf-861f-2fc0f98bb712/subcategories",
+							"raw": "/api/categories/cf47b160-df9d-4186-8335-6a346bd89cb0/subcategories",
 							"path": [
 								"api",
 								"categories",
-								"4815e09a-38a0-4fbf-861f-2fc0f98bb712",
+								"cf47b160-df9d-4186-8335-6a346bd89cb0",
 								"subcategories"
 							]
 						}
@@ -170,6 +187,25 @@
 					"response": []
 				},
 				{
+					"name": "list all products in sub-category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/api/categories/49496ccb-c2b9-4631-98bb-45cb63623e1f/subcategories/f37d42b7-785b-4d6f-9f6e-32296f77dfe3/products",
+							"path": [
+								"api",
+								"categories",
+								"49496ccb-c2b9-4631-98bb-45cb63623e1f",
+								"subcategories",
+								"f37d42b7-785b-4d6f-9f6e-32296f77dfe3",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "create sub-category",
 					"request": {
 						"method": "POST",
@@ -184,11 +220,11 @@
 							}
 						},
 						"url": {
-							"raw": "/api/categories/567b09b2-ccc6-43c8-83d6-a01a911ceeb2/subcategories",
+							"raw": "/api/categories/fa1fd362-240b-4678-91fa-b0252d145e1a/subcategories",
 							"path": [
 								"api",
 								"categories",
-								"567b09b2-ccc6-43c8-83d6-a01a911ceeb2",
+								"fa1fd362-240b-4678-91fa-b0252d145e1a",
 								"subcategories"
 							]
 						}
@@ -307,7 +343,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Walnut Round Dining Table\",\r\n    \"price\": 26.00,\r\n    \"categoryId\":\"4815e09a-38a0-4fbf-861f-2fc0f98bb712\",\r\n    \"subCategoryId\":\"75491705-aada-4fb3-9694-c01a3dac776e\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Walnut 6-seater Dining Table\",\r\n    \"price\": 26.00,\r\n    \"categoryId\":\"fa1fd362-240b-4678-91fa-b0252d145e1a\",\r\n    \"subCategoryId\":\"0e4e7448-9912-4f8e-9b0d-d3e1c1d1069a\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

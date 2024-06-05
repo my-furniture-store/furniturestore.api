@@ -30,8 +30,8 @@ public static  class ProductTestHelper
         {
             var dbContext = scope.ServiceProvider.GetRequiredService<FurnitureStoreDbContext>();       
 
-            var categories = await dbContext.Products.ToListAsync();
-            dbContext.Products.RemoveRange(categories);
+            var products = await dbContext.Products.ToListAsync();
+            dbContext.Products.RemoveRange(products);
 
             await dbContext.SaveChangesAsync();
 

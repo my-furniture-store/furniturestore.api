@@ -1,4 +1,6 @@
-﻿using FurnitureStore.Application.SubCategories.Commands.CreateSubCategory;
+﻿using FurnitureStore.API.Utils;
+using FurnitureStore.Application.Products.Queries.ListSubCategoryProducts;
+using FurnitureStore.Application.SubCategories.Commands.CreateSubCategory;
 using FurnitureStore.Application.SubCategories.Commands.DeleteSubCategory;
 using FurnitureStore.Application.SubCategories.Commands.UpdateSubCategory;
 using FurnitureStore.Application.SubCategories.Queries.GetSubCategory;
@@ -59,6 +61,19 @@ public class SubCategoriesController : ApiController
         return listSubCategoriesResult.Match(
             subCategories => Ok(subCategories.ConvertAll(subCategory => new SubCategoryResponse(subCategory.Id, subCategory.Name))),
             errors => Problem(errors));
+    }
+
+    [HttpGet("{subCategoryId:guid}/products")]
+    public async Task<IActionResult> ListProductsBySubCategoryId(Guid categoryId, Guid subCategoryId)
+    {
+        var query = new ListSubCategoryProductsQuery(categoryId,subCategoryId);
+
+        var productsResult = await _mediator.Send(query);
+
+        return productsResult.Match(
+           products => Ok(products.ConvertAll(product => ProductHelper.ToDto(product))),
+           errors => Problem(errors)
+           );
     }
 
     [HttpPut("{subCategoryId:guid}")]
