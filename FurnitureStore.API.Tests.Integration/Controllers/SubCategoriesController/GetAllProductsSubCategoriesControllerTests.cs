@@ -2,29 +2,29 @@
 using FurnitureStore.Tests.Common.Fixtures;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FurnitureStore.API.Tests.Integration.Controllers.CategoriesController;
+namespace FurnitureStore.API.Tests.Integration.Controllers.SubCategoriesController;
 
 [Collection("FurnitureStore.API Collection")]
-public class GetAllProductsCategoriesControllerTests : IAsyncLifetime
+public class GetAllProductsSubCategoriesControllerTests : IAsyncLifetime
 {
     private readonly FurnistoreApiFactory _appFactory;
     private readonly HttpClient _httpClient;
 
-    public GetAllProductsCategoriesControllerTests(FurnistoreApiFactory appFactory)
+    public GetAllProductsSubCategoriesControllerTests(FurnistoreApiFactory appFactory)
     {
         _appFactory = appFactory;
         _httpClient = appFactory.CreateClient();
     }
 
     [Fact]
-    public async Task GetProductsByCategoryId_ShouldReturnCategoryNotFound_WhenCategorySpecifiedDoesNotExist()
+    public async Task GetAllProductBySubCategoryId_ShouldReturnCategoryNotFound_WhenCategoryDoesNotExist()
     {
         // Act
-        var result = await _httpClient.GetAsync($"api/categories/{Guid.NewGuid()}/products");
+        var result = await _httpClient.GetAsync($"api/categories/{Guid.NewGuid()}/subCategories/{Guid.NewGuid()}/products");
 
         // Assert
         result.StatusCode.Should().Be(HttpStatusCode.NotFound);
-        
+
         var problem = await HttpResponseHelper.GetFromResponse<ValidationProblemDetails>(result);
 
         problem.Should().NotBeNull();
@@ -33,14 +33,36 @@ public class GetAllProductsCategoriesControllerTests : IAsyncLifetime
     }
 
     [Fact]
-    public async Task GetProductsByCategoryId_ShouldReturnEmptyList_WhenCategorySpecifiedHasNoProductsAssigned()
+    public async Task GetAllProductsBySubCategoryId_ShouldReturnSubCategoryNotFound_WhenSubCategoryIsMissingFromCategory()
     {
         // Arrange
-        var category = CategoriesFixture.GetTestCategories()[1];
+        var category = CategoriesFixture.GetTestCategories()[0];
         await CategoryTestHelper.CreateCategory(_appFactory, category);
 
         // Act
-        var result = await _httpClient.GetAsync($"api/categories/{category.Id}/products");
+        var result = await _httpClient.GetAsync($"api/categories/{category.Id}/subCategories/{Guid.NewGuid()}/products");
+
+        // Assert
+        result.StatusCode.Should().Be(HttpStatusCode.NotFound);
+
+        var problem = await HttpResponseHelper.GetFromResponse<ValidationProblemDetails>(result);
+
+        problem.Should().NotBeNull();
+        problem!.Status.Should().Be(404);
+        problem!.Detail.Should().Be("Sub-category not found.");
+    }
+
+    [Fact]
+    public async Task GetAllProductsBySubCategoryId_ShouldReturnEmpty_WhenSubCategoryHasNoProductsAssigned()
+    {
+        // Arrange
+        var category = CategoriesFixture.GetTestCategories()[1];
+        var subCategory = SubCategoriesFixture.GetTestSubCategories(category.Id)[1];
+        await CategoryTestHelper.CreateCategory(_appFactory, category);
+        await SubCategoryTestHelper.CreateSubCategory(_appFactory, subCategory);
+
+        // Act
+        var result = await _httpClient.GetAsync($"api/categories/{category.Id}/subCategories/{subCategory.Id}/products");
 
         // Assert
         result.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -51,7 +73,7 @@ public class GetAllProductsCategoriesControllerTests : IAsyncLifetime
     }
 
     [Fact]
-    public async Task GetProductsByCategoryId_ShouldReturnListOfProducts_WhenCategorySpecifiedHasProductsAssigned()
+    public async Task GetAllProductsBySubCategoryId_ShouldReturnEmpty_WhenSubCategoryHasProductsAssigned()
     {
         // Arrange
         var category = CategoriesFixture.GetTestCategories()[1];
@@ -62,9 +84,8 @@ public class GetAllProductsCategoriesControllerTests : IAsyncLifetime
         await SubCategoryTestHelper.CreateSubCategory(_appFactory, subCategory);
         await ProductTestHelper.CreateProduct(_appFactory, product1, product2);
 
-
         // Act
-        var result = await _httpClient.GetAsync($"api/categories/{category.Id}/products");
+        var result = await _httpClient.GetAsync($"api/categories/{category.Id}/subCategories/{subCategory.Id}/products");
 
         // Assert
         result.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -89,13 +110,14 @@ public class GetAllProductsCategoriesControllerTests : IAsyncLifetime
         productsList!.Should().AllSatisfy(product =>
         {
             product.CategoryName.Should().Be(category.Name);
+            product.SubCategoryName.Should().Be(subCategory.Name);
         });
     }
+
 
     public Task InitializeAsync() => Task.CompletedTask;
     public async Task DisposeAsync()
     {
         await DbContextHelper.ClearAllTables(_appFactory);
     }
-
 }
