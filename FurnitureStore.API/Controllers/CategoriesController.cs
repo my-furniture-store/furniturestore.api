@@ -1,8 +1,10 @@
-﻿using FurnitureStore.Application.Categories.Commands.CreateCategory;
+﻿using FurnitureStore.API.Utils;
+using FurnitureStore.Application.Categories.Commands.CreateCategory;
 using FurnitureStore.Application.Categories.Commands.DeleteCategory;
 using FurnitureStore.Application.Categories.Commands.UpdateCategory;
 using FurnitureStore.Application.Categories.Queries.GetCategory;
 using FurnitureStore.Application.Categories.Queries.ListCategories;
+using FurnitureStore.Application.Products.Queries.ListCategoryProducts;
 using FurnitureStore.Contracts.Categories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +44,19 @@ public class CategoriesController : ApiController
         return getCategoryResult.MatchFirst(
             category =>
             Ok(new CategoryResponse(categoryId, category.Name)),
+            errors => Problem(errors)
+            );
+    }
+
+    [HttpGet("{categoryId:guid}/products")]
+    public async Task<IActionResult> GetProductsByCategoryId(Guid categoryId)
+    {
+        var query = new ListCategoryProductsQuery(categoryId);
+        
+        var productsResult = await _mediator.Send(query);
+
+        return productsResult.Match(
+            products => Ok(products.ConvertAll(product => ProductHelper.ToDto(product))),
             errors => Problem(errors)
             );
     }

@@ -8,22 +8,26 @@ namespace FurnitureStore.Application.Products.Queries.ListSubCategoryProducts;
 public class ListSubCategoryProductsQueryHandler : IRequestHandler<ListSubCategoryProductsQuery, ErrorOr<List<Product>>>
 {
     private readonly IProductsRepository _productsRepository;
-    private readonly ISubCategoriesRepository _subCategoriesRepository;
+    private readonly ICategoriesRepository _categoriesRepository;
 
-    public ListSubCategoryProductsQueryHandler(IProductsRepository productsRepository, ISubCategoriesRepository subCategoriesRepository)
+    public ListSubCategoryProductsQueryHandler(IProductsRepository productsRepository, ICategoriesRepository categoriesRepository)
     {
         _productsRepository = productsRepository;
-        _subCategoriesRepository = subCategoriesRepository;
+        _categoriesRepository = categoriesRepository;
     }
 
     public async Task<ErrorOr<List<Product>>> Handle(ListSubCategoryProductsQuery request, CancellationToken cancellationToken)
     {
-        var subCategory = await _subCategoriesRepository.GetByIdAsync(request.SubCategoryId);
+        var category = await _categoriesRepository.GetByIdAsync(request.CategoryId);
 
-        if (subCategory is null)
+        if (category == null)
+            return Error.NotFound(description:"Category not found.");
+
+
+        if (!category.HasSubCategory(request.SubCategoryId))
             return Error.NotFound(description: "Sub-category not found.");
 
-        var products = await _productsRepository.GetProductsBySubCategoryIdAsync(subCategory.Id);
+        var products = await _productsRepository.GetProductsBySubCategoryIdAsync(request.SubCategoryId);
 
         return products;
     }

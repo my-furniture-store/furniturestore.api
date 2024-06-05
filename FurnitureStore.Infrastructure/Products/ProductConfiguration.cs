@@ -119,7 +119,7 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(product => product.Discount)
             .HasColumnName("discount")
             .HasColumnType("decimal")
-            .IsRequired();
+            .IsRequired(false);
 
         builder.Property(product => product.Status)
             .HasColumnName("status")

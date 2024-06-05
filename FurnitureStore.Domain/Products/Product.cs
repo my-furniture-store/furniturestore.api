@@ -32,7 +32,7 @@ public class Product
     public Guid CategoryId { get; }
     public Guid SubCategoryId { get; }
     public string? SKU { get; private set; }
-    public int? StockQuantity { get; private set; } = default!;
+    public int? StockQuantity { get; private set; }
     public string? ImageUrl { get; private set; }
     public string? Dimensions { get; private set; }
     public decimal? Weight { get; private set; }
@@ -42,7 +42,7 @@ public class Product
     public double? Rating { get; private set; }
     public DateTime DateAdded { get; }
     public bool IsFeatured { get; private set; }
-    public decimal? Discount { get; private set; } = default!;
+    public decimal? Discount { get; private set; } 
     public ProductStatus Status { get; private set; } = null!;
 
     public Category Category { get; } = null!;

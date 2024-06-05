@@ -1,8 +1,6 @@
-﻿using FurnitureStore.Application.Products.Queries.ListCategoryProducts;
-using FurnitureStore.Application.Products.Queries.ListSubCategoryProducts;
+﻿using FurnitureStore.Application.Products.Queries.ListSubCategoryProducts;
 using FurnitureStore.Application.Tests.Unit.Mocks;
 using FurnitureStore.Domain.Products;
-using NSubstitute;
 
 namespace FurnitureStore.Application.Tests.Unit.System.Products.Queries;
 
@@ -10,25 +8,41 @@ public class ListSubCategoryProductsQueryHandlerTests
 {
     private readonly ListSubCategoryProductsQueryHandler _sut;
     private readonly IProductsRepository _productsRepository;
-    private readonly ISubCategoriesRepository _subCategoriesRepository;
+    private readonly ICategoriesRepository _categoriesRepository;
     private readonly Guid _categoryId;
     private readonly Guid _subCategoryId;
 
     public ListSubCategoryProductsQueryHandlerTests()
     {
-        _categoryId = Guid.NewGuid();
+        _categoryId = CategoriesFixture.GetTestCategories()[0].Id;
         _subCategoryId= SubCategoriesFixture.GetTestSubCategories(_categoryId)[0].Id;
-        _subCategoriesRepository = MockSubCategoriesRepository.GetSubCategoriesRepository(_categoryId);
+        _categoriesRepository = MockCategoriesRepository.GetCategoriesRepository();
         _productsRepository = MockProductsRepository.GetProductsRepository(_categoryId, _subCategoryId);
 
-        _sut = new(_productsRepository, _subCategoriesRepository);
+        _sut = new(_productsRepository, _categoriesRepository);
+    }
+
+    [Fact]
+    public async Task Handle_ShouldReturnCategoryNotFound_WhenCategoryDoesNotExist()
+    {
+        // Arrange
+        var query = new ListSubCategoryProductsQuery(Guid.NewGuid(), Guid.NewGuid());
+
+        // Act
+        var result = await _sut.Handle(query, CancellationToken.None);
+
+        // Assert
+        result.IsError.Should().BeTrue();
+        result.Errors.Should().NotBeEmpty();
+        result.Errors[0].Type.Should().Be(ErrorType.NotFound);
+        result.Errors[0].Description.Should().Be("Category not found.");
     }
 
     [Fact]
     public async Task Handle_ShouldReturnSubCategoryNotFound_WhenSubCategoryDoesNotExist()
     {
         // Arrange
-        var query = new ListSubCategoryProductsQuery(Guid.NewGuid());
+        var query = new ListSubCategoryProductsQuery(_categoryId, Guid.NewGuid());
 
         // Act
         var result = await _sut.Handle(query, CancellationToken.None);
@@ -46,7 +60,7 @@ public class ListSubCategoryProductsQueryHandlerTests
         // Arrange
         var subCategoryId = SubCategoriesFixture.GetTestSubCategories(_categoryId)[0].Id;
         _productsRepository.GetProductsBySubCategoryIdAsync(subCategoryId).Returns(Enumerable.Empty<Product>().ToList());
-        var query = new ListSubCategoryProductsQuery(subCategoryId);
+        var query = new ListSubCategoryProductsQuery(_categoryId, subCategoryId);
 
         // Act
         var result = await _sut.Handle(query, CancellationToken.None);
@@ -60,7 +74,7 @@ public class ListSubCategoryProductsQueryHandlerTests
     public async Task Handle_ShouldReturnProductsList_WhenSubCategoryHasProducts()
     {
         // Arrange
-        var query = new ListSubCategoryProductsQuery(_subCategoryId);
+        var query = new ListSubCategoryProductsQuery(_categoryId, _subCategoryId);
 
         // Act
         var result = await _sut.Handle(query, CancellationToken.None);

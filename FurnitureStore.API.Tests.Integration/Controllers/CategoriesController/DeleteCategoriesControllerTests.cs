@@ -74,7 +74,7 @@ public class DeleteCategoriesControllerTests : IAsyncLifetime
 
     public async Task DisposeAsync()
     {
-        await SubCategoryTestHelper.ClearAllCategories(_appFactory);
+        await SubCategoryTestHelper.ClearAllSubCategories(_appFactory);
         await CategoryTestHelper.ClearAllCategories(_appFactory);
     }
 

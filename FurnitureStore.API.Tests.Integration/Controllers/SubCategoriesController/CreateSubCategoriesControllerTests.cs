@@ -95,7 +95,7 @@ public class CreateSubCategoriesControllerTests : IAsyncLifetime
     public Task InitializeAsync() => Task.CompletedTask;
     public async Task DisposeAsync()
     {
-        await SubCategoryTestHelper.ClearAllCategories(_appFactory);
+        await SubCategoryTestHelper.ClearAllSubCategories(_appFactory);
         await CategoryTestHelper.ClearAllCategories(_appFactory);
     }
 
