@@ -1,5 +1,6 @@
 ﻿using FurnitureStore.API.Utils;
 using FurnitureStore.Application.Products.Commands.CreateProduct;
+using FurnitureStore.Application.Products.Commands.UpdateProduct;
 using FurnitureStore.Application.Products.Queries.GetProduct;
 using FurnitureStore.Application.Products.Queries.ListProducts;
 using FurnitureStore.Contracts.Products;
@@ -51,6 +52,34 @@ public class ProductsController : ApiController
 
         return createProductResult.MatchFirst(
             product => CreatedAtAction(nameof(GetProduct), new {productId = product.Id}, ProductHelper.ToDto(product)),
+            errors => Problem(errors));
+    }
+
+    [HttpPut("{productId:guid}")]
+    public async Task<IActionResult> UpdateProduct(Guid productId, UpdateProductRequest request)
+    {
+        var command = new UpdateProductCommand(
+            ProductId: productId,
+            Name: request.Name,
+            Price: request.Price,
+            IsFeatured: request.IsFeatured,
+            Description: request.Description,
+            SKU: request.SKU,
+            StockQuantity: request.StockQuantity,
+            ImageUrl: request.ImageUrl,
+            Dimensions: request.Dimensions,
+            Weight: request.Weight,
+            Material: request.Material,
+            Colors: request.Colors?.ConvertAll(ProductHelper.ToDomainType),
+            Brand: request.Brand,
+            Rating: request.Rating,
+            Discount: request.Discount,
+            ProductStatus: ProductHelper.ToDomainType(request.ProductStatus));
+
+        var updateProductResult = await _mediator.Send(command);
+
+        return updateProductResult.MatchFirst(
+            product => Ok(ProductHelper.ToDto(product)),
             errors => Problem(errors));
     }
 

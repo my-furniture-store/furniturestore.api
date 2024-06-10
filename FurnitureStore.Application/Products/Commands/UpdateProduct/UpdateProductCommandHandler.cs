@@ -32,6 +32,9 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
         product.SetBrandAndMaterial(request.Brand, request.Material);
         product.SetStockQuantity(request.StockQuantity);
         product.SetDiscount(request.Discount);
+        product.SetRating(request.Rating);
+        product.SetSKU(request.SKU);
+        product.SetDimensionAndWeight(dimensions: request.Dimensions, weight: request.Weight);
 
         // add colors
         if(request.Colors != null && request.Colors.Count > 0)

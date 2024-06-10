@@ -45,7 +45,7 @@ public class UpdateCategoriesControllerTests : IAsyncLifetime
         var category = new Category("Chairs");
         await CategoryTestHelper.CreateCategory(_appFactory, category);
 
-        var categoryUpdateRequest = new CreateCategoryRequest(Name: "");
+        var categoryUpdateRequest = new UpdateCategoryRequest(Name: "");
 
         // Act
         var response = await _httpClient.PutAsJsonAsync($"api/categories/{category.Id}", categoryUpdateRequest);
@@ -67,7 +67,7 @@ public class UpdateCategoriesControllerTests : IAsyncLifetime
         await CategoryTestHelper.CreateCategory(_appFactory, category);
 
         var invalidName = new String('A',51);
-        var categoryUpdateRequest = new CreateCategoryRequest(Name: invalidName);
+        var categoryUpdateRequest = new UpdateCategoryRequest(Name: invalidName);
 
         // Act
         var response = await _httpClient.PutAsJsonAsync($"api/categories/{category.Id}", categoryUpdateRequest);

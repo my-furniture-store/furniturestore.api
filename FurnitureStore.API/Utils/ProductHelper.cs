@@ -51,4 +51,24 @@ public static class ProductHelper
             _ => throw new InvalidOperationException()
         };
     }
+
+
+    public static DomainProductStatus? ToDomainType(ContractProductStatus? productStatus)
+    {
+        if (productStatus == null)
+            return null;
+
+        return productStatus switch
+        {
+           ContractProductStatus.Active => DomainProductStatus.Active,
+           ContractProductStatus.Discontinued => DomainProductStatus.Discontinued,
+           ContractProductStatus.OutOfStock => DomainProductStatus.Discontinued,
+            _ => throw new InvalidOperationException()
+        };
+    }
+
+    public static DomainProductColor ToDomainType(ContractProductColor color)
+    {
+        return new DomainProductColor { Name = color.ColorName, Code = color.ColorCode };
+    }
 }

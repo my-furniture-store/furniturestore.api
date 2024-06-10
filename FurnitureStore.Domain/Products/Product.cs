@@ -125,5 +125,27 @@ public class Product
     {
         this.Discount = discount;
     }
+
+    public void SetRating(double? rating)
+    {
+        this.Rating = rating;
+    }
+
+    public void SetSKU(string? sku)
+    {
+        if (string.IsNullOrWhiteSpace(sku))
+            return;
+
+        this.SKU = sku;
+    }
+
+    public void SetDimensionAndWeight(string? dimensions = null, decimal? weight = null)
+    {
+        if(!string.IsNullOrWhiteSpace(dimensions))
+            this.Dimensions = dimensions;
+
+        if(weight.HasValue)
+            this.Weight = weight.Value;
+    }
     #endregion Public Methods
 }
