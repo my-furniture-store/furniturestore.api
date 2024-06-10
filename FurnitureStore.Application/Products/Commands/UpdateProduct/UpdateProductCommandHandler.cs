@@ -26,6 +26,26 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand,
         }
 
         product.UpdateProduct(request.Name, request.Price);
+        product.SetProductDescription(request.Description);
+        product.UpdateProductStatus(request.ProductStatus);
+        product.SetImageUrl(request.ImageUrl);
+        product.SetBrandAndMaterial(request.Brand, request.Material);
+        product.SetStockQuantity(request.StockQuantity);
+        product.SetDiscount(request.Discount);
+        product.SetRating(request.Rating);
+        product.SetSKU(request.SKU);
+        product.SetDimensionAndWeight(dimensions: request.Dimensions, weight: request.Weight);
+
+        // add colors
+        if(request.Colors != null && request.Colors.Count > 0)
+        {
+            foreach(var color in request.Colors)
+            {
+               var result = product.AddProductColor(colorName: color.Name, colorCode: color.Code);
+
+                if (result.IsError) return result.Errors;
+            }
+        }
 
         await _productsRepository.UpdateAsync(product);
         await _unitofWork.CommitChangesAsync();

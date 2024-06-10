@@ -135,4 +135,55 @@ public class ProductTests
         // Assert
         _sut.ImageUrl.Should().Be("http://example.com/image.jpg");
     }
+
+
+    [Fact]
+    public void SetRating_ShouldUpdateRating()
+    {
+        // Act
+        _sut.SetRating(4.5);
+
+        // Assert
+        _sut.Rating.Should().Be(4.5);
+    }
+
+    [Fact]
+    public void SetSKU_ShouldUpdateSKU()
+    {
+        // Arrange
+        var skuValue = "PRO12345";
+
+        // Act
+        _sut.SetSKU(skuValue);
+
+        // Assert
+        _sut.SKU.Should().Be(skuValue);
+    }
+
+    [Fact]
+    public void SetDimensionAndWeight_ShouldUpdateDimension_WhenDimensionIsProvided()
+    {
+        // Arrage
+        var dimensions = "123cm * 45cm * 60cm";
+
+        // Act
+        _sut.SetDimensionAndWeight(dimensions);
+
+        // Assert
+        _sut.Dimensions.Should().Be(dimensions);
+    }
+
+    [Fact]
+    public void SetDimensionAndWeight_ShouldUpdateWeight_WhenWeightIsProvided()
+    {
+        // Arrange
+        var weight = 67;
+
+        // Act
+        _sut.SetDimensionAndWeight(weight: weight);
+
+        // Assert
+        _sut.Weight.Should().Be(weight);        
+    }
+
 }

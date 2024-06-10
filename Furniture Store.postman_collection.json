@@ -31,7 +31,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Sofas\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Seats\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -157,11 +157,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "/api/categories/cf47b160-df9d-4186-8335-6a346bd89cb0/subcategories",
+							"raw": "/api/categories/49496ccb-c2b9-4631-98bb-45cb63623e1d/subcategories",
 							"path": [
 								"api",
 								"categories",
-								"cf47b160-df9d-4186-8335-6a346bd89cb0",
+								"49496ccb-c2b9-4631-98bb-45cb63623e1d",
 								"subcategories"
 							]
 						}
@@ -212,7 +212,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Dining Table\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Chesterfield Sofas\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -220,11 +220,11 @@
 							}
 						},
 						"url": {
-							"raw": "/api/categories/fa1fd362-240b-4678-91fa-b0252d145e1a/subcategories",
+							"raw": "/api/categories/49496ccb-c2b9-4631-98bb-45cb63623e1d/subcategories",
 							"path": [
 								"api",
 								"categories",
-								"fa1fd362-240b-4678-91fa-b0252d145e1a",
+								"49496ccb-c2b9-4631-98bb-45cb63623e1d",
 								"subcategories"
 							]
 						}
@@ -343,7 +343,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Walnut 6-seater Dining Table\",\r\n    \"price\": 26.00,\r\n    \"categoryId\":\"fa1fd362-240b-4678-91fa-b0252d145e1a\",\r\n    \"subCategoryId\":\"0e4e7448-9912-4f8e-9b0d-d3e1c1d1069a\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Dark grey Chesterfield 3 Seater\",\r\n    \"price\": 128.00,\r\n    \"categoryId\":\"49496ccb-c2b9-4631-98bb-45cb63623e1d\",\r\n    \"subCategoryId\":\"c75454a0-1356-4a27-a4c2-68c12b54d341\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -355,6 +355,31 @@
 							"path": [
 								"api",
 								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Name\": \"Modern Sofa\",\r\n  \"Price\": 299.99,\r\n  \"IsFeatured\": true,\r\n  \"Description\": \"A comfortable modern sofa with a sleek design.\",\r\n  \"SKU\": \"SOFA12345\",\r\n  \"StockQuantity\": 50,\r\n  \"ImageUrl\": \"http://example.com/images/modern-sofa.jpg\",\r\n  \"Dimensions\": \"80x35x30 inches\",\r\n  \"Weight\": 75.5,\r\n  \"Material\": \"Leather\",\r\n  \"Colors\": [\r\n    {\r\n      \"Code\": \"#FFFFFF\",\r\n      \"Name\": \"White\"\r\n    },\r\n    {\r\n      \"Code\": \"#000000\",\r\n      \"Name\": \"Black\"\r\n    }\r\n  ],\r\n  \"Brand\": \"Luxury Home\",\r\n  \"Rating\": 4.5,\r\n  \"Discount\": 15.00,\r\n  \"ProductStatus\": {\r\n    \"Name\": \"Active\",\r\n    \"Value\": 1\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/api/products/f0bfa2d6-0b0e-40f4-809c-0d896b71f498",
+							"path": [
+								"api",
+								"products",
+								"f0bfa2d6-0b0e-40f4-809c-0d896b71f498"
 							]
 						}
 					},

@@ -1,13 +1,11 @@
-﻿using ErrorOr;
-using FurnitureStore.Domain.Products;
-using MediatR;
+﻿using FurnitureStore.Contracts.ValidationAttributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace FurnitureStore.Application.Products.Commands.UpdateProduct;
+namespace FurnitureStore.Contracts.Products;
 
-public record UpdateProductCommand(
-    Guid ProductId,
+public record UpdateProductRequest(
     string? Name = null,
-    decimal? Price = null,
+    [MinimumValue(25)]decimal? Price = null,
     bool? IsFeatured = null,
     string? Description = null,
     string? SKU = null,
@@ -20,6 +18,5 @@ public record UpdateProductCommand(
     string? Brand = null,
     double? Rating = null,
     decimal? Discount = null,
-    ProductStatus? ProductStatus = null
-    ): IRequest<ErrorOr<Product>>;
+    ProductStatus? ProductStatus = null);
 
