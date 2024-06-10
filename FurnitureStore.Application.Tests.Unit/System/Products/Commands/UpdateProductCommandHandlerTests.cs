@@ -40,6 +40,23 @@ public class UpdateProductCommandHandlerTests
     }
 
     [Fact]
+    public async Task Handle_ShouldReturnDuplicateColorsError_WhenUpdatingProductWithDuplicatColors()
+    {
+        // Arrange
+        var colors = new List<ProductColor> { new ProductColor { Name = "Light Red", Code = "#FF0000" } };
+        var productId = ProductsFixture.GetListofProducts(_categoryId, _subCategoryId)[0].Id;
+        var command = new UpdateProductCommand(ProductId:  productId, Colors:  colors);
+
+        // Act
+        var result = await _sut.Handle(command, CancellationToken.None);
+
+        // Assert
+        result.IsError.Should().BeTrue();
+        result.Errors.Should().NotBeEmpty();
+        result.Errors[0].Should().Be(ProductErrors.CannotHaveDuplicateColors);
+    }
+
+    [Fact]
     public async Task Handle_ShouldReturnUpdatedProduct_WhenProductExists()
     {
         // Arrange

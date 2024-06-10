@@ -27,7 +27,7 @@ public class Product
     #region Properties
     public Guid Id { get; }
     public string Name { get; private set; } = null!;
-    public string? Description { get; private set; } 
+    public string? Description { get; private set; }
     public decimal Price { get; private set; }
     public Guid CategoryId { get; }
     public Guid SubCategoryId { get; }
@@ -42,7 +42,7 @@ public class Product
     public double? Rating { get; private set; }
     public DateTime DateAdded { get; }
     public bool IsFeatured { get; private set; }
-    public decimal? Discount { get; private set; } 
+    public decimal? Discount { get; private set; }
     public ProductStatus Status { get; private set; } = null!;
 
     public Category Category { get; } = null!;
@@ -65,38 +65,45 @@ public class Product
 
     public ErrorOr<Success> AddProductColor(string colorName, string colorCode)
     {
-        var color = Colors?.Where(color => color.Name.ToLower() == colorName.ToLower() ||  color.Code.ToLower() == colorCode.ToLower()).FirstOrDefault();
+        var color = Colors?.Where(color => color.Name.ToLower() == colorName.ToLower() || color.Code.ToLower() == colorCode.ToLower()).FirstOrDefault();
 
         if (color is not null)
         {
             return ProductErrors.CannotHaveDuplicateColors;
         }
-        
+
         Colors!.Add(new ProductColor { Name = colorName, Code = colorCode });
 
         return Result.Success;
     }
 
-    public void SetProductDescription(string description)
+    public void SetProductDescription(string? description)
     {
-        if(!string.IsNullOrWhiteSpace(description))
-            this.Description = description;
+        if (string.IsNullOrWhiteSpace(description))
+            return;
+
+        this.Description = description;
     }
 
-    public void UpdateProductStatus(ProductStatus productStatus)
+    public void UpdateProductStatus(ProductStatus? productStatus)
     {
+        if (productStatus is null)
+            return;
+
         this.Status = productStatus;
     }
 
-    public void SetImageUrl(string imageUrl)
+    public void SetImageUrl(string? imageUrl)
     {
-        if(!string.IsNullOrWhiteSpace(imageUrl))
-            this.ImageUrl = imageUrl;
+        if (string.IsNullOrWhiteSpace(imageUrl))
+            return;
+
+        this.ImageUrl = imageUrl;
     }
 
     public void SetBrandAndMaterial(string? brand = null, string? material = null)
     {
-        if(!string.IsNullOrWhiteSpace(brand))
+        if (!string.IsNullOrWhiteSpace(brand))
         {
             this.Brand = brand;
         }
@@ -107,14 +114,14 @@ public class Product
         }
     }
 
-    public void SetStockQuantity(int quantity)
+    public void SetStockQuantity(int? quantity)
     {
         this.StockQuantity = quantity;
 
         this.Status = ProductStatus.Active;
     }
 
-    public void SetDiscount(decimal discount)
+    public void SetDiscount(decimal? discount)
     {
         this.Discount = discount;
     }
