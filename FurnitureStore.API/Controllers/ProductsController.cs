@@ -1,7 +1,9 @@
 ﻿using FurnitureStore.API.Utils;
 using FurnitureStore.Application.Products.Commands.CreateProduct;
+using FurnitureStore.Application.Products.Commands.DeleteProduct;
 using FurnitureStore.Application.Products.Commands.UpdateProduct;
 using FurnitureStore.Application.Products.Queries.GetProduct;
+using FurnitureStore.Application.Products.Queries.ListFeaturedProducts;
 using FurnitureStore.Application.Products.Queries.ListProducts;
 using FurnitureStore.Contracts.Products;
 using MediatR;
@@ -27,6 +29,18 @@ public class ProductsController : ApiController
         var productsListResult = await _mediator.Send(query);
 
         return productsListResult.Match(
+            products => Ok(products.ConvertAll(product => ProductHelper.ToDto(product))),
+            errors => Problem(errors));
+    }
+
+    [HttpGet("featured")]
+    public async Task<IActionResult> ListFeaturedProducts()
+    {
+        var query = new ListFeaturedProductsQuery();
+
+        var featuredProductResult = await _mediator.Send(query);
+
+        return featuredProductResult.Match(
             products => Ok(products.ConvertAll(product => ProductHelper.ToDto(product))),
             errors => Problem(errors));
     }
@@ -83,4 +97,14 @@ public class ProductsController : ApiController
             errors => Problem(errors));
     }
 
+
+    [HttpDelete("{productId:guid}")]
+    public async Task<IActionResult> DeleteProduct(Guid productId)
+    {
+        var command = new DeleteProductCommand(productId: productId);
+
+        var deleteProductResult = await _mediator.Send(command);
+
+        return deleteProductResult.Match<IActionResult>(_ => NoContent(), errors => Problem(errors));
+    }
 }

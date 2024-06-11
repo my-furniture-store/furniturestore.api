@@ -14,6 +14,7 @@ public class ProductsFixture
             .WithPrice(50m)
             .WithCategoryId(categoryId)
             .WithSubCategoryId(subCategoryId)
+            .WithIsFeatured(false)
             .WithDescription("Description for Product 1")
             .WithSKU("SKU001")
             .WithStockQuantity(10)
@@ -29,7 +30,6 @@ public class ProductsFixture
             .WithBrand("Brand A")
             .WithRating(4.5)
             .WithDiscount(10m)
-            .WithIsFeatured(true)
             .WithStatus(ProductStatus.Active)
             .Build(),
 
@@ -39,6 +39,7 @@ public class ProductsFixture
             .WithPrice(75m)
             .WithCategoryId(categoryId)
             .WithSubCategoryId(subCategoryId)
+            .WithIsFeatured(true)
             .WithDescription("Description for Product 2")
             .WithSKU("SKU002")
             .WithStockQuantity(0)
@@ -54,7 +55,6 @@ public class ProductsFixture
             .WithBrand("Brand B")
             .WithRating(4.0)
             .WithDiscount(5m)
-            .WithIsFeatured(false)
             .WithStatus(ProductStatus.OutofStock)
             .Build(),
 
@@ -64,6 +64,7 @@ public class ProductsFixture
             .WithPrice(100m)
             .WithCategoryId(categoryId)
             .WithSubCategoryId(subCategoryId)
+            .WithIsFeatured(true)
             .WithDescription("Description for Product 3")
             .WithSKU("SKU003")
             .WithStockQuantity(5)
@@ -79,7 +80,6 @@ public class ProductsFixture
             .WithBrand("Brand C")
             .WithRating(3.5)
             .WithDiscount(15m)
-            .WithIsFeatured(false)
             .WithStatus(ProductStatus.Discontinued)
             .Build()
     };

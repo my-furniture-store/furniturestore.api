@@ -25,6 +25,39 @@
 					"response": []
 				},
 				{
+					"name": "get category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/api/categories/4815e09a-38a0-4fbf-861f-2fc0f98bb711",
+							"path": [
+								"api",
+								"categories",
+								"4815e09a-38a0-4fbf-861f-2fc0f98bb711"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all products in category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/api/categories/cf47b160-df9d-4186-8335-6a346bd89cb0/products",
+							"path": [
+								"api",
+								"categories",
+								"cf47b160-df9d-4186-8335-6a346bd89cb0",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "create",
 					"request": {
 						"method": "POST",
@@ -84,39 +117,6 @@
 								"api",
 								"categories",
 								"3bf36b37-cb0a-46f6-be9c-d9784926bc0c"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get category",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "/api/categories/4815e09a-38a0-4fbf-861f-2fc0f98bb711",
-							"path": [
-								"api",
-								"categories",
-								"4815e09a-38a0-4fbf-861f-2fc0f98bb711"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "all products in category",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "/api/categories/cf47b160-df9d-4186-8335-6a346bd89cb0/products",
-							"path": [
-								"api",
-								"categories",
-								"cf47b160-df9d-4186-8335-6a346bd89cb0",
-								"products"
 							]
 						}
 					},
@@ -220,11 +220,11 @@
 							}
 						},
 						"url": {
-							"raw": "/api/categories/49496ccb-c2b9-4631-98bb-45cb63623e1d/subcategories",
+							"raw": "/api/categories/1b540b33-05f3-4587-8133-4a187d10915e/subcategories",
 							"path": [
 								"api",
 								"categories",
-								"49496ccb-c2b9-4631-98bb-45cb63623e1d",
+								"1b540b33-05f3-4587-8133-4a187d10915e",
 								"subcategories"
 							]
 						}
@@ -337,13 +337,29 @@
 					"response": []
 				},
 				{
+					"name": "list featured products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/api/products/featured",
+							"path": [
+								"api",
+								"products",
+								"featured"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "create product",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Dark grey Chesterfield 3 Seater\",\r\n    \"price\": 128.00,\r\n    \"categoryId\":\"49496ccb-c2b9-4631-98bb-45cb63623e1d\",\r\n    \"subCategoryId\":\"c75454a0-1356-4a27-a4c2-68c12b54d341\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Navy blue Chesterfield single Seater\",\r\n    \"price\": 88.00,\r\n    \"categoryId\":\"1b540b33-05f3-4587-8133-4a187d10915e\",\r\n    \"subCategoryId\":\"cffe2696-782b-4d78-93f0-07948b5e19fb\",\r\n    \"isFeatured\":true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -380,6 +396,22 @@
 								"api",
 								"products",
 								"f0bfa2d6-0b0e-40f4-809c-0d896b71f498"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "/api/products/8935dcb9-804b-4369-8e9c-b4cd18039aa0",
+							"path": [
+								"api",
+								"products",
+								"8935dcb9-804b-4369-8e9c-b4cd18039aa0"
 							]
 						}
 					},
@@ -442,13 +474,13 @@
 		{
 			"key": "baseUrl",
 			"value": "https://localhost:7000",
-			"type": "string",
-			"disabled": true
+			"type": "string"
 		},
 		{
 			"key": "baseUrl",
 			"value": "https://localhost:7070",
-			"type": "string"
+			"type": "string",
+			"disabled": true
 		}
 	]
 }
