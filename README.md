@@ -78,6 +78,7 @@ to access the Swagger UI.
 ### Products
 #### Products
 - **GET** `/api/products` - Retrieve all products. 
+- **GET** `/api/products/featured` - Retrieve all featured products. 
 - **GET** `/api/products/{id}` - Retrieve a product by ID. 
 - **POST** `/api/products` - Add a new product. 
 - **PUT** `/api/products/{id}` - Update an existing product.
