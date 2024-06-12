@@ -34,7 +34,7 @@ public class GetAllProductsControllerTests : IAsyncLifetime
     public async Task GetAll_ShouldReturnProductsList_WhenProductsExist()
     {
         // Arrange
-        var category = CategoriesFixture.GetTestCategories()[1];
+        var category = CategoriesFixture.GetTestCategories()[2];
         var subCategory = SubCategoriesFixture.GetTestSubCategories(category.Id)[2];
         var product1 = ProductsFixture.GetListofProducts(category.Id, subCategory.Id)[0];
         var product2 = ProductsFixture.GetListofProducts(category.Id, subCategory.Id)[1];
@@ -56,7 +56,10 @@ public class GetAllProductsControllerTests : IAsyncLifetime
         productsResponse!.Count.Should().Be(2);
     }
 
-    public Task InitializeAsync() => Task.CompletedTask;
+    public async Task InitializeAsync()
+    {
+        await DbContextHelper.ClearAllTables(_appFactory);
+    }
 
     public async Task DisposeAsync()
     {

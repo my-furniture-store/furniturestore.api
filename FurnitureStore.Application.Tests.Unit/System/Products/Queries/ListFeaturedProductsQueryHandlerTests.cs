@@ -49,6 +49,6 @@ public class ListFeaturedProductsQueryHandlerTests
         // Assert
         result.IsError.Should().BeFalse();
         result.Value.Should().BeOfType<List<Product>>();
-        result.Value.Count.Should().Be(1);
+        result.Value.Count.Should().Be(2);
     }
 }

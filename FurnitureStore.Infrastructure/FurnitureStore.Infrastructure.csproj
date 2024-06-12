@@ -20,4 +20,8 @@
     <ProjectReference Include="..\FurnitureStore.Application\FurnitureStore.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Users\" />
+  </ItemGroup>
+
 </Project>
