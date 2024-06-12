@@ -31,12 +31,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.Property(user => user.PasswordHash)
             .HasColumnName("password_hash")
-            .HasColumnType("binary(32)")
+            .HasColumnType("binary(64)")
             .IsRequired();
         
         builder.Property(user => user.PasswordSalt)
             .HasColumnName("password_salt")
-            .HasColumnType("binary(32)")
+            .HasColumnType("binary(64)")
             .IsRequired();
 
         builder.Property(user => user.AccessToken)

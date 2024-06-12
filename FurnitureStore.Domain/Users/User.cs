@@ -1,4 +1,6 @@
-﻿namespace FurnitureStore.Domain.Users;
+﻿using ErrorOr;
+
+namespace FurnitureStore.Domain.Users;
 
 public class User
 {
@@ -19,8 +21,8 @@ public class User
     public Guid Id { get; }
     public string Username { get; private set; } = null!;
     public string Email { get; private set; } = null!;
-    public byte[] PasswordHash { get; private set; } = new byte[32];
-    public byte[] PasswordSalt { get; private set; } = new byte[32];
+    public byte[] PasswordHash { get; private set; } = new byte[64];
+    public byte[] PasswordSalt { get; private set; } = new byte[64];
     public string? AccessToken { get; private set; }
     public DateTime? VerifiedAt { get; private set; }
     public string? PasswordResetToken { get; private set; }
@@ -55,6 +57,20 @@ public class User
     public void SetResetTokenExpiryDate()
     {
         this.ResetTokenExpires = DateTime.Now.AddHours(2);
+    }
+
+    public ErrorOr<Success> UpdatePassword(byte[]? passwordHash, byte[]? passwordSalt)
+    {
+        if (passwordHash == null || passwordHash.Length != 64)
+            return UserErrors.InvalidPasswordHash;
+
+        if(passwordSalt == null || passwordSalt.Length != 64)   
+            return UserErrors.InvalidPasswordSalt;
+
+        this.PasswordHash = passwordHash;
+        this.PasswordSalt = passwordSalt;
+
+        return Result.Success;
     }
 
     #endregion Public Methods

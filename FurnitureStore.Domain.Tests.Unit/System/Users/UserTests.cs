@@ -125,4 +125,88 @@ public class UserTests
     }
 
 
+    [Fact]
+    public void UpdatePassword_ShouldUpdatePasswordHashAndSalt_WhenInputsAreValid()
+    {
+        // Arrange
+        var newPasswordHash = new byte[64];
+        var newPasswordSalt = new byte[64];
+        new Random().NextBytes(newPasswordHash);
+        new Random().NextBytes(newPasswordSalt);
+
+        // Act
+        var result = _sut.UpdatePassword(newPasswordHash, newPasswordSalt);
+
+        // Assert
+        result.IsError.Should().BeFalse();
+        _sut.PasswordHash.Should().Equal(newPasswordHash);
+        _sut.PasswordSalt.Should().Equal(newPasswordSalt);
+    }
+
+    [Fact]
+    public void UpdatePassword_ShouldReturnInvalidPasswordHash_WhenPasswordHashIsNull()
+    {
+        // Arrange
+        byte[]? passwordHash = null;
+        var newPasswordSalt = new byte[64];
+
+        // Act
+        var result = _sut.UpdatePassword(passwordHash, newPasswordSalt);
+
+        // Act
+        result.IsError.Should().BeTrue();
+        result.Errors.Should().NotBeEmpty();
+        result.Errors[0].Description.Should().Be("Invalid password hash.");
+    }
+    
+    [Fact]
+    public void UpdatePassword_ShouldReturnInvalidPasswordHash_WhenPasswordHashIsInvalidLength()
+    {
+        // Arrange
+        var newPasswordHash = new byte[32];
+        var newPasswordSalt = new byte[64];
+
+        // Act
+        var result = _sut.UpdatePassword(newPasswordHash, newPasswordSalt);
+
+        // Act
+        result.IsError.Should().BeTrue();
+        result.Errors.Should().NotBeEmpty();
+        result.Errors[0].Description.Should().Be("Invalid password hash.");
+    }
+    
+    [Fact]
+    public void UpdatePassword_ShouldReturnInvalidPasswordSalt_WhenPasswordSaltIsNull()
+    {
+        // Arrange
+        var newPasswordHash = new byte[64];
+        byte[]? passwordSalt = null;
+
+        // Act
+        var result = _sut.UpdatePassword(newPasswordHash, passwordSalt);
+
+        // Act
+        result.IsError.Should().BeTrue();
+        result.Errors.Should().NotBeEmpty();
+        result.Errors[0].Description.Should().Be("Invalid password salt.");
+    }
+
+    [Fact]
+    public void UpdatePassword_ShouldReturnInvalidPasswordSalt_WhenPasswordSaltIsInvalidLength()
+    {
+        // Arrange
+        var newPasswordHash = new byte[64];
+        var newPasswordSalt = new byte[32];
+
+        // Act
+        var result = _sut.UpdatePassword(newPasswordHash, newPasswordSalt);
+
+        // Act
+        result.IsError.Should().BeTrue();
+        result.Errors.Should().NotBeEmpty();
+        result.Errors[0].Description.Should().Be("Invalid password salt.");
+    }
+
+
+
 }

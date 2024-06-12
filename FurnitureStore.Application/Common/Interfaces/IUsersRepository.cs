@@ -11,4 +11,5 @@ public interface IUsersRepository
     Task<bool> UsernameUsed(string username);
     Task<List<User>> GetAllUsersAsync();
     Task<User?> GetByIdAsync(Guid userId);
+    Task<User?> GetByUsernameOrEmail(string? username = null, string? email = null);
 }

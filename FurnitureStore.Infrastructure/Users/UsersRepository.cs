@@ -29,6 +29,17 @@ public class UsersRepository : IUsersRepository
         return await _dbContext.Users.FirstOrDefaultAsync(user => user.Id == userId);
     }
 
+    public async Task<User?> GetByUsernameOrEmail(string? username = null, string? email = null)
+    {
+        if(!string.IsNullOrEmpty(username)) 
+            return await _dbContext.Users.FirstOrDefaultAsync(user => user.Username == username);
+
+        if(!string.IsNullOrWhiteSpace(email))
+            return await _dbContext.Users.FirstOrDefaultAsync(user => user.Email == email);
+
+        return null;
+    }
+
     public Task RemoveUserAsync(User user)
     {
         _dbContext.Users.Remove(user);

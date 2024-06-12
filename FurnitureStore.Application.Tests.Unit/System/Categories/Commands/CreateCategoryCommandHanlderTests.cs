@@ -1,8 +1,5 @@
-﻿using FluentAssertions;
-using FurnitureStore.Application.Categories.Commands.CreateCategory;
-using FurnitureStore.Application.Common.Interfaces;
+﻿using FurnitureStore.Application.Categories.Commands.CreateCategory;
 using FurnitureStore.Domain.Categories;
-using NSubstitute;
 
 namespace FurnitureStore.Application.Tests.Unit.System.Categories.Commands;
 
