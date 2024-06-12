@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FurnitureStore.Application\FurnitureStore.Application.csproj" />
     <ProjectReference Include="..\FurnitureStore.Domain\FurnitureStore.Domain.csproj" />
   </ItemGroup>
 

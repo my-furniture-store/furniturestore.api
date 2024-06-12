@@ -9,4 +9,10 @@ public class EntityTestHelper
         var field = typeof(TObj).GetField(propertyName, BindingFlags.NonPublic | BindingFlags.Instance);
         field?.SetValue(obj,value);
     }
+
+    public static void SetValueForPrivateSetter<TObj, TValue>(TObj obj, TValue value, string propertyName)
+    {
+        var field = typeof(TObj).GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+        field?.SetValue(obj,value);
+    }
 }

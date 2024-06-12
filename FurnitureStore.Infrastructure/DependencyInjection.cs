@@ -1,5 +1,6 @@
 ﻿using FluentMigrator.Runner;
 using FurnitureStore.Application.Common.Interfaces;
+using FurnitureStore.Infrastructure.Authentication;
 using FurnitureStore.Infrastructure.Categories;
 using FurnitureStore.Infrastructure.Common;
 using FurnitureStore.Infrastructure.Products;
@@ -49,6 +50,12 @@ public static class DependencyInjection
                 .ScanIn(typeof(DependencyInjection).Assembly).For.Migrations()
                 )
             ;
+
+        // Configure JwtOptions
+        services.Configure<JwtOptions>(configuration.GetSection(nameof(JwtOptions)));
+
+        // Register JwtProvider
+        services.AddSingleton<IJwtProvider, JwtProvider>();
 
         return services;
     }
