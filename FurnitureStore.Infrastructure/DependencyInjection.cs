@@ -5,6 +5,7 @@ using FurnitureStore.Infrastructure.Categories;
 using FurnitureStore.Infrastructure.Common;
 using FurnitureStore.Infrastructure.Products;
 using FurnitureStore.Infrastructure.SubCategories;
+using FurnitureStore.Infrastructure.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +37,7 @@ public static class DependencyInjection
                 .AddScoped<ICategoriesRepository, CategoriesRepository>()
                 .AddScoped<ISubCategoriesRepository, SubCategoriesRepository>()
                 .AddScoped<IProductsRepository, ProductsRepository>()
+                .AddScoped<IUsersRepository, UsersRepository>()
                 .AddScoped<IUnitofWork>(serviceProvider => serviceProvider.GetRequiredService<FurnitureStoreDbContext>());
 
         // Configure FluentMigrator

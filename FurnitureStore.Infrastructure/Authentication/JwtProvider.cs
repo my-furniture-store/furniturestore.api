@@ -43,12 +43,23 @@ public class JwtProvider : IJwtProvider
 
     public DateTime? GetTokenExpiryDate(string token)
     {
-        if(string.IsNullOrWhiteSpace(token)) 
+        var handler = new JwtSecurityTokenHandler();
+
+        // check if the token can be read
+        if(!handler.CanReadToken(token))
             return null;
 
-        var jwtToken = new JwtSecurityTokenHandler().ReadToken(token.Replace("\"", string.Empty)) as JwtSecurityToken;
+        // Read token 
+        var jwtToken = handler.ReadJwtToken(token);
 
-        var expiryDate = jwtToken?.ValidTo;
+        // Extract the 'exp' claim
+        var expClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Exp);
+
+        if (expClaim == null)
+            return null;
+                
+        var expValue = long.Parse(expClaim.Value);
+        var expiryDate = DateTimeOffset.FromUnixTimeSeconds(expValue).UtcDateTime;
 
         return expiryDate;
     }

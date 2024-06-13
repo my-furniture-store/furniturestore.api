@@ -60,7 +60,7 @@ public class RegisterUserCommandHandlerTests
     }
 
     [Fact]
-    public async Task Handle_ShouldReturnCreatedUser_WhenParametersAreValid()
+    public async Task Handle_ShouldReturnSuccess_WhenParametersAreValid()
     {
         // Arrange
         var user = _userGenerator.Generate();
@@ -70,13 +70,9 @@ public class RegisterUserCommandHandlerTests
         var result = await _sut.Handle(command, CancellationToken.None);
 
         // Assert
-        result.IsError.Should().BeFalse();
-        result.Value.Should().BeOfType<User>();
+        result.IsError.Should().BeFalse();        
         result.Value.Should().NotBeNull();
-        result.Value.Username.Should().Be(user.Username);
-        result.Value.Email.Should().Be(user.Email);
-        result.Value.Id.Should().NotBeEmpty();
-        result.Value.PasswordHash.Should().NotBeNullOrEmpty();
-        result.Value.PasswordSalt.Should().NotBeNullOrEmpty();
+        result.Value.Should().BeOfType<Success>();
+        
     }
 }

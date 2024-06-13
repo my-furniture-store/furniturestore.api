@@ -8,7 +8,7 @@ public interface IUsersRepository
     Task UpdateUserAsync(User user);
     Task RemoveUserAsync(User user);
     Task<bool> UserExists(string email);
-    Task<bool> UsernameUsed(string username);
+    Task<bool> IsUsernameUnique(string username);
     Task<List<User>> GetAllUsersAsync();
     Task<User?> GetByIdAsync(Guid userId);
     Task<User?> GetByUsernameOrEmail(string? username = null, string? email = null);
