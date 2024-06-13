@@ -22,7 +22,7 @@ public class JwtProvider : IJwtProvider
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(), ClaimValueTypes.Integer64)
+            new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
         };
 
         var signingCredentials = new SigningCredentials(
@@ -34,7 +34,7 @@ public class JwtProvider : IJwtProvider
             audience: _jwtOptions.Audience,
             claims: claims,
             notBefore: null,
-            expires: DateTime.UtcNow.AddHours(2),
+            expires: DateTime.UtcNow.AddHours(2),            
             signingCredentials: signingCredentials
             );
 
@@ -43,24 +43,40 @@ public class JwtProvider : IJwtProvider
 
     public DateTime? GetTokenExpiryDate(string token)
     {
+        if (string.IsNullOrWhiteSpace(token))
+            return null;        
+  
         var handler = new JwtSecurityTokenHandler();
 
-        // check if the token can be read
-        if(!handler.CanReadToken(token))
+        try
+        {
+            // Check if the token can be read
+            if (!handler.CanReadToken(token))
+            {
+                throw new ArgumentException("Invalid JWT token");
+            }
+
+            // Read the token
+            var jwtToken = handler.ReadJwtToken(token);
+
+            // Extract the 'exp' claim
+            var expClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Exp);
+
+            if (expClaim != null)
+            {
+                // Convert exp claim to DateTime
+                var expValue = long.Parse(expClaim.Value);
+                var expiryDate = DateTimeOffset.FromUnixTimeSeconds(expValue).UtcDateTime;
+                return expiryDate;
+            }
+
+            // If there is no 'exp' claim, return null
             return null;
+        }
+        catch
+        {
 
-        // Read token 
-        var jwtToken = handler.ReadJwtToken(token);
-
-        // Extract the 'exp' claim
-        var expClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == JwtRegisteredClaimNames.Exp);
-
-        if (expClaim == null)
             return null;
-                
-        var expValue = long.Parse(expClaim.Value);
-        var expiryDate = DateTimeOffset.FromUnixTimeSeconds(expValue).UtcDateTime;
-
-        return expiryDate;
+        }
     }
 }
