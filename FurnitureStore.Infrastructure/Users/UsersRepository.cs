@@ -57,7 +57,7 @@ public class UsersRepository : IUsersRepository
         return await _dbContext.Users.AsNoTracking().AnyAsync(user => user.Email == email);
     }
 
-    public async Task<bool> UsernameUsed(string username)
+    public async Task<bool> IsUsernameUnique(string username)
     {
         return await _dbContext.Users.AsNoTracking().AnyAsync(user => user.Username == username);
     }

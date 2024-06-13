@@ -1,5 +1,6 @@
 ﻿using ErrorOr;
 using FurnitureStore.Application.Common.Interfaces;
+using FurnitureStore.Application.Utils;
 using MediatR;
 
 namespace FurnitureStore.Application.Users.Commands.Login;
@@ -19,22 +20,14 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<string>
 
     public async Task<ErrorOr<string>> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrWhiteSpace(request.Username)) 
-        {
-            if (!await _usersRepository.UserExists(request.Email!))
-                return Error.Conflict(description: "Invalid credentials.");
-        }
-        else
-        {
-            if (!await _usersRepository.UsernameUsed(request.Username))
-                return Error.Conflict(description: "Invalid credentials.");
-        }
-
         var user = await _usersRepository.GetByUsernameOrEmail(username: request.Username, email: request.Email);
 
         if (user == null)
-            return Error.NotFound(description: "User not found.");
+            return Error.Validation(description: "Invalid credentials.");
 
+        // Verfiy password
+        if (!PasswordManager.VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+            return Error.Validation(description: "Invalid credentials.");
 
         if(!string.IsNullOrWhiteSpace(user.AccessToken))
         {
@@ -43,6 +36,11 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<string>
                 var accessToken = _jwtProvider.GenerateUserAccessToken(user);
                 user.SetAccessToken(accessToken);
             }
+        }
+        else
+        {
+            var accessToken = _jwtProvider.GenerateUserAccessToken(user);
+            user.SetAccessToken(accessToken);
         }
 
         await _usersRepository.UpdateUserAsync(user);

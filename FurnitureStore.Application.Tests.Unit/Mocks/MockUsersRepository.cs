@@ -14,9 +14,31 @@ public static class MockUsersRepository
             .Returns(x => users.FirstOrDefault(user => user.Id == x.Arg<Guid>()));
         mockRepo.UserExists(Arg.Any<string>())
             .Returns(x => users.Any(user => user.Email == x.Arg<string>()));
-        mockRepo.UsernameUsed(Arg.Any<string>())
+        mockRepo.IsUsernameUnique(Arg.Any<string>())
             .Returns(x => users.Any(user => user.Username == x.Arg<string>()));
+        mockRepo.GetByUsernameOrEmail(Arg.Any<string>(), Arg.Any<string>())
+            .Returns(x =>
+            {
+                var username = (string)x[0];
+                var email = (string)x[1];
+                return Task.FromResult(
+                    users.FirstOrDefault(user => user.Username == username || user.Email == email));
+            });
         mockRepo.CreateUserAsync(Arg.Do<User>(users.Add));
+        mockRepo.UpdateUserAsync(Arg.Any<User>()).Returns(Task.CompletedTask).AndDoes(
+            x =>
+            {
+                var user = x.Arg<User>();
+
+                var existingUser = users.FirstOrDefault(u => u.Id == user.Id);
+
+                if(existingUser != null)
+                {
+                    users.Remove(existingUser);
+                    users.Add(user);
+                }
+            });
+
         return mockRepo;
     }
 }

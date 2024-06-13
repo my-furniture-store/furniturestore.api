@@ -6,7 +6,7 @@ using MediatR;
 
 namespace FurnitureStore.Application.Users.Commands.RegisterUser;
 
-public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, ErrorOr<User>>
+public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, ErrorOr<Success>>
 {
     private readonly IUsersRepository _usersRepository;
     private readonly IUnitofWork _unitofWork;
@@ -15,12 +15,12 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, E
         _usersRepository = usersRepository;
         _unitofWork = unitofWork;
     }
-    public async Task<ErrorOr<User>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<Success>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         if (await _usersRepository.UserExists(request.Email))
             return Error.Conflict(description: "User already exists.");
 
-        if (await _usersRepository.UsernameUsed(request.Username))
+        if (await _usersRepository.IsUsernameUnique(request.Username))
             return Error.Conflict(description: "Username already in use.");
 
         PasswordManager.CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
@@ -34,6 +34,6 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, E
         await _usersRepository.CreateUserAsync(user);
         await _unitofWork.CommitChangesAsync();
 
-        return user;
+        return Result.Success;
     }
 }
