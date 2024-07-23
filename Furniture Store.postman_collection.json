@@ -407,11 +407,90 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "/api/products/8935dcb9-804b-4369-8e9c-b4cd18039aa0",
+							"raw": "/api/products/4b9e539e-6b45-48a6-8eb2-0810728f92cb",
 							"path": [
 								"api",
 								"products",
-								"8935dcb9-804b-4369-8e9c-b4cd18039aa0"
+								"4b9e539e-6b45-48a6-8eb2-0810728f92cb"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"const baseUrl = pm.variables.get(\"baseUrl\");\r",
+							"\r",
+							"pm.request.url.host = `${baseUrl}`;"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Brian K\",\r\n    \"email\":\"briank.mwaniki@gmail.com\",\r\n    \"password\":\"Brian@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/api/auth/register",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"edward\",\r\n    \"password\":\"Brian@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "/api/auth/login",
+							"path": [
+								"api",
+								"auth",
+								"login"
 							]
 						}
 					},
@@ -474,13 +553,13 @@
 		{
 			"key": "baseUrl",
 			"value": "https://localhost:7000",
-			"type": "string"
+			"type": "string",
+			"disabled": true
 		},
 		{
 			"key": "baseUrl",
 			"value": "https://localhost:7070",
-			"type": "string",
-			"disabled": true
+			"type": "string"
 		}
 	]
 }
