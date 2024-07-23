@@ -29,23 +29,8 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<string>
         if (!PasswordManager.VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             return Error.Validation(description: "Invalid credentials.");
 
-        if(!string.IsNullOrWhiteSpace(user.AccessToken))
-        {
-            if(_jwtProvider.GetTokenExpiryDate(user.AccessToken) < DateTime.UtcNow)
-            {
-                var accessToken = _jwtProvider.GenerateUserAccessToken(user);
-                user.SetAccessToken(accessToken);
-            }
-        }
-        else
-        {
-            var accessToken = _jwtProvider.GenerateUserAccessToken(user);
-            user.SetAccessToken(accessToken);
-        }
-
-        await _usersRepository.UpdateUserAsync(user);
-        await _unitofWork.CommitChangesAsync();
-
-        return user.AccessToken!;
+        var accessToken = _jwtProvider.GenerateUserAccessToken(user);
+        
+        return accessToken;
     }
 }

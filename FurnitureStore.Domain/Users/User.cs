@@ -23,20 +23,11 @@ public class User
     public string Email { get; private set; } = null!;
     public byte[] PasswordHash { get; private set; } = new byte[64];
     public byte[] PasswordSalt { get; private set; } = new byte[64];
-    public string? AccessToken { get; private set; }
     public DateTime? VerifiedAt { get; private set; }
-    public string? PasswordResetToken { get; private set; }
     public DateTime? ResetTokenExpires { get; private set; }
     #endregion Properties
 
-    #region Public Methods
-
-    public void SetAccessToken(string accessToken)
-    {
-        if (string.IsNullOrWhiteSpace(accessToken))
-            return;
-        this.AccessToken = accessToken;
-    }
+    #region Public Methods   
 
     public void Verify()
     {
@@ -46,17 +37,9 @@ public class User
         this.VerifiedAt = DateTime.Now;
     }
 
-    public void SetPasswordResetToken(string resetToken)
-    {
-        if(string.IsNullOrWhiteSpace(resetToken)) 
-            return;
-
-        this.PasswordResetToken = resetToken;
-    }
-
     public void SetResetTokenExpiryDate()
     {
-        this.ResetTokenExpires = DateTime.Now.AddHours(2);
+        this.ResetTokenExpires = DateTime.Now.AddMinutes(5);
     }
 
     public ErrorOr<Success> UpdatePassword(byte[]? passwordHash, byte[]? passwordSalt)

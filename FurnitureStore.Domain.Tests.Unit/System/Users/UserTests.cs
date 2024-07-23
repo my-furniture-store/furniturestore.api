@@ -36,33 +36,6 @@ public class UserTests
     }
 
     [Fact]
-    public void SetAccessToken_ShouldSetAccessToken_WhenAccessTokenIsProvided()
-    {
-        // Arrange
-        var accessToken = "newAccessToken";
-
-        //Act
-        _sut.SetAccessToken(accessToken);
-
-        // Assert
-        _sut.AccessToken.Should().Be(accessToken);
-    }
-
-    [Fact]
-    public void SetAccessToken_ShouldNotSetAccessToken_WhenAccessTokenIsEmptyOrNull()
-    {
-        // Arrange
-        var accessToken = string.Empty;
-
-        // Act
-        _sut.SetAccessToken(accessToken);
-
-        // Assert
-        _sut.AccessToken.Should().BeNullOrWhiteSpace();
-    }
-
-
-    [Fact]
     public void Verify_ShouldSetVerifiedAt_WhenVerifiedAtHasNotBeenSet()
     {
         // Act
@@ -86,42 +59,16 @@ public class UserTests
         _sut.VerifiedAt.Should().HaveYear(2000);
         _sut.VerifiedAt.Should().HaveMonth(1);
         _sut.VerifiedAt.Should().HaveDay(1);
-    }
+    }   
 
     [Fact]
-    public void SetPasswordResetToken_ShouldSetPasswordResetToken_WhenTokenIsProvided()
-    {
-        // Arrange
-        var accessToken = "newResetToken";
-
-        //Act
-        _sut.SetPasswordResetToken(accessToken);
-
-        // Assert
-        _sut.PasswordResetToken.Should().Be(accessToken);
-    }
-
-    [Fact]
-    public void SetPasswordResetToken_ShouldNotSetPasswordResetToken_WhenTokenIsEmptyOrNull()
-    {
-        // Arrange
-        var accessToken = string.Empty;
-
-        // Act
-        _sut.SetPasswordResetToken(accessToken);
-
-        // Assert
-        _sut.AccessToken.Should().BeNullOrWhiteSpace();
-    }
-
-    [Fact]
-    public void SetResetTokenExpiryDate_ShouldSetResetTokenExpiresTwoHoursFromNow_WhenCalled()
+    public void SetResetTokenExpiryDate_ShouldSetResetTokenExpires5MinutesFromNow_WhenCalled()
     {
         // Act
         _sut.SetResetTokenExpiryDate();
 
         // Assert
-        _sut.ResetTokenExpires.Should().BeWithin(2.Hours()).After(DateTime.Now);
+        _sut.ResetTokenExpires.Should().BeWithin(5.Minutes()).After(DateTime.Now);
     }
 
 

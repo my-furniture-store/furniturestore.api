@@ -39,20 +39,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasColumnType("binary(64)")
             .IsRequired();
 
-        builder.Property(user => user.AccessToken)
-            .HasColumnName("access_token")
-            .HasColumnType("character_varying")
-            .IsRequired(false);
-
         builder.Property(user => user.VerifiedAt)
             .HasColumnName("verified_at")
             .HasColumnType("datetime")
-            .IsRequired(false);
-
-        builder.Property(user => user.PasswordResetToken)
-           .HasColumnName("password_reset_token")
-           .HasColumnType("character_varying")
-           .IsRequired(false);
+            .IsRequired(false);        
 
         builder.Property(user => user.ResetTokenExpires)
             .HasColumnName("reset_token_expires")
