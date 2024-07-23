@@ -12,12 +12,11 @@ public static class MockJwtProvider
         mockProvider.GenerateUserAccessToken(Arg.Any<User>())
             .Returns(x => $"token_for_{x.Arg<User>().Username}");
 
-        mockProvider.GetTokenExpiryDate(Arg.Any<string>())
+        mockProvider.ValidateToken(Arg.Any<string>())
             .Returns(x =>
             {
                 var token = x.Arg<string>();
-                return users.Any(user => token.Contains(user.Username))
-                ? DateTime.UtcNow.AddHours(1) : (DateTime?)null;
+                return users.Any(user => token.Contains(user.Username));
             });
 
         return mockProvider;

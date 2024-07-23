@@ -71,7 +71,7 @@ The API includes Swagge UI for easy testing and exploration. Once the applicatio
 to access the Swagger UI.
 
 ## API Endpoints
-### Authentication *(Coming soon)*
+### Authentication
 - **POST** `api/auth/register` - Register a new user
 - **POST** `api/auth/login` - Authentication a user and retrieve token.
 

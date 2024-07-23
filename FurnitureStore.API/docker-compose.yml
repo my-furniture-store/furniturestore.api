@@ -12,6 +12,7 @@
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.pfx
       - ASPNETCORE_Environment=Production
       - FurnitureStoreAPI_ConnectionStrings__FurnitureStoreDB=Server=db;Port=5432;Database=furniture_store;User ID=fs_admin;Password=store1234!;
+      - FurnitureStoreAPI_JwtOptions__SecretKey=7AzVCqcHJTvjgfCyHKadl9PXptdqT9XPU8jt4DW/brY=
     depends_on:
       db:
         condition: service_started
