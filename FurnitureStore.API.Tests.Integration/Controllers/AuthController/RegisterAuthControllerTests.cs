@@ -1,10 +1,12 @@
 ﻿using FurnitureStore.Contracts.Authentication;
+using FurnitureStore.Domain.Users;
+using FurnitureStore.Tests.Common.Fixtures;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FurnitureStore.API.Tests.Integration.Controllers.AuthController;
 
 [Collection("FurnitureStore.API Collection")]
-public class RegisterAuthControllerTests
+public class RegisterAuthControllerTests : IAsyncLifetime
 {
     private readonly FurnistoreApiFactory _appFactory;
     private readonly HttpClient _httpClient;
@@ -109,6 +111,30 @@ public class RegisterAuthControllerTests
     }
 
     [Fact]
+    public async Task Register_ShouldReturnConflict_WhenUserAlreadyExists()
+    {
+        //Arrange
+        var user = UsersFixture.GetUsers()[0];
+        await DbContextHelper.CreateEntity<User>(_appFactory, user);
+
+        var userRequest = _userGenerator
+                                .RuleFor(x => x.Username, user.Username)
+                                .RuleFor(x => x.Email, user.Email)
+                                .Generate();
+
+        // Act
+        // Act
+        var response = await _httpClient.PostAsJsonAsync("api/auth/register", userRequest);
+
+        // Assert
+        response.StatusCode.Should().Be(HttpStatusCode.Conflict);
+        var error = await HttpResponseHelper.ReadFromResponse<ProblemDetails>(response);
+        error!.Status.Should().Be(409);
+        error.Title.Should().Be("Conflict");
+        error.Detail.Should().Be("User already exists.");
+    }
+
+    [Fact]
     public async Task Register_ShouldReturnSuccessMessage_WhenUserIsCreated()
     {
         // Arrange
@@ -124,4 +150,11 @@ public class RegisterAuthControllerTests
         successMessage.Should().NotBeNullOrWhiteSpace();
     }
 
+    public Task InitializeAsync() => Task.CompletedTask;
+    
+
+    public async Task DisposeAsync()
+    {
+        await DbContextHelper.ClearEntities<User>(_appFactory);
+    }
 }
