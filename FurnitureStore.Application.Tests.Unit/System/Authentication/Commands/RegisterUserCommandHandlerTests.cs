@@ -1,9 +1,9 @@
 ﻿using Bogus;
 using FurnitureStore.Application.Tests.Unit.Mocks;
-using FurnitureStore.Application.Users.Commands.RegisterUser;
+using FurnitureStore.Application.Authentication.Commands.RegisterUser;
 using FurnitureStore.Domain.Users;
 
-namespace FurnitureStore.Application.Tests.Unit.System.Users.Commands;
+namespace FurnitureStore.Application.Tests.Unit.System.Authentication.Commands;
 
 public class RegisterUserCommandHandlerTests
 {

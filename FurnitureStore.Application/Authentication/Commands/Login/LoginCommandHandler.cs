@@ -3,7 +3,7 @@ using FurnitureStore.Application.Common.Interfaces;
 using FurnitureStore.Application.Utils;
 using MediatR;
 
-namespace FurnitureStore.Application.Users.Commands.Login;
+namespace FurnitureStore.Application.Authentication.Commands.Login;
 
 public class LoginCommandHandler : IRequestHandler<LoginCommand, ErrorOr<string>>
 {

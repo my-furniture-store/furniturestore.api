@@ -1,5 +1,5 @@
-﻿using FurnitureStore.Application.Users.Commands.Login;
-using FurnitureStore.Application.Users.Commands.RegisterUser;
+﻿using FurnitureStore.Application.Authentication.Commands.Login;
+using FurnitureStore.Application.Authentication.Commands.RegisterUser;
 using FurnitureStore.Contracts.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
