@@ -1,5 +1,5 @@
 ﻿using FluentValidation.TestHelper;
-using FurnitureStore.Application.Users.Commands.RegisterUser;
+using FurnitureStore.Application.Authentication.Commands.RegisterUser;
 
 namespace FurnitureStore.Application.Tests.Unit.System.Users.Validators;
 

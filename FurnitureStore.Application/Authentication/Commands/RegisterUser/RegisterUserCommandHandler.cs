@@ -4,7 +4,7 @@ using FurnitureStore.Application.Utils;
 using FurnitureStore.Domain.Users;
 using MediatR;
 
-namespace FurnitureStore.Application.Users.Commands.RegisterUser;
+namespace FurnitureStore.Application.Authentication.Commands.RegisterUser;
 
 public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, ErrorOr<Success>>
 {

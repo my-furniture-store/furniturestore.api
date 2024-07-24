@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace FurnitureStore.Application.Users.Commands.Login;
+namespace FurnitureStore.Application.Authentication.Commands.Login;
 
 public class LoginCommandValidator : AbstractValidator<LoginCommand>
 {
